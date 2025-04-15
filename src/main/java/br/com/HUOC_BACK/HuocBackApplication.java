@@ -21,7 +21,7 @@ public class HuocBackApplication {
 	@Profile("dev")
 	public CommandLineRunner devProfile(UserRepository userRepository, PasswordEncoder encoder){
 		return args -> {
-				userRepository.save(new User("admin",encoder.encode("123")));
+				userRepository.save(new User("admin@enail.com",encoder.encode("123")));
 		};
 	}
 }
