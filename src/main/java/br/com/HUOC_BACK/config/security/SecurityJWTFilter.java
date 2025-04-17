@@ -1,6 +1,6 @@
-package br.com.HUOC_BACK.Config.Security;
+package br.com.HUOC_BACK.config.security;
 
-import br.com.HUOC_BACK.repository.UserRepository;
+import br.com.HUOC_BACK.repository.IUserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -18,11 +18,11 @@ import java.util.Objects;
 @Component
 public class SecurityJWTFilter extends OncePerRequestFilter {
     private final TokenService tokenService;
-    private final UserRepository userRepository;
+    private final IUserRepository IUserRepository;
 
-    public SecurityJWTFilter(TokenService tokenService, UserRepository userRepository) {
+    public SecurityJWTFilter(TokenService tokenService, IUserRepository IUserRepository) {
         this.tokenService = tokenService;
-        this.userRepository = userRepository;
+        this.IUserRepository = IUserRepository;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class SecurityJWTFilter extends OncePerRequestFilter {
                 if(cookie.getName().equals("JWT")){
                     String email = tokenService.validateToken(cookie.getValue());
                     if(email != null) {
-                        UserDetails user = userRepository.findByEmail(email).orElseThrow(()->new RuntimeException("User not found"));
+                        UserDetails user = IUserRepository.findByEmail(email).orElseThrow(()->new RuntimeException("User not found"));
 
                         var auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                         SecurityContextHolder.getContext().setAuthentication(auth);

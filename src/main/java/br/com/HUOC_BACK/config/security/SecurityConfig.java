@@ -1,4 +1,4 @@
-package br.com.HUOC_BACK.Config.Security;
+package br.com.HUOC_BACK.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

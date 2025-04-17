@@ -1,4 +1,4 @@
-package br.com.HUOC_BACK.Config.Audit;
+package br.com.HUOC_BACK.config.audit;
 
 
 import br.com.HUOC_BACK.model.User;
