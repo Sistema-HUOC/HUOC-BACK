@@ -1,4 +1,4 @@
-package br.com.HUOC_BACK.Config.Security;
+package br.com.HUOC_BACK.config.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
