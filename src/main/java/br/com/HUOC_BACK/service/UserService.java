@@ -1,6 +1,6 @@
-package br.com.HUOC_BACK.Users.domain.service;
+package br.com.HUOC_BACK.service;
 
-import br.com.HUOC_BACK.Users.domain.repository.UserRepository;
+import br.com.HUOC_BACK.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package br.com.HUOC_BACK.Users.domain.model;
+package br.com.HUOC_BACK.model;
 
 import jakarta.persistence.*;
 import org.hibernate.envers.Audited;

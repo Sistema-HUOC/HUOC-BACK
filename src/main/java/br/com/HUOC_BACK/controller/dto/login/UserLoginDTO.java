@@ -1,4 +1,4 @@
-package br.com.HUOC_BACK.Users.application.dto;
+package br.com.HUOC_BACK.controller.dto.login;
 
 import jakarta.validation.constraints.NotBlank;
 

@@ -1,7 +1,7 @@
 package br.com.HUOC_BACK;
 
-import br.com.HUOC_BACK.Users.domain.model.User;
-import br.com.HUOC_BACK.Users.domain.repository.UserRepository;
+import br.com.HUOC_BACK.model.User;
+import br.com.HUOC_BACK.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

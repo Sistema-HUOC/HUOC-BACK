@@ -1,6 +1,6 @@
-package br.com.HUOC_BACK.Users.domain.repository;
+package br.com.HUOC_BACK.repository;
 
-import br.com.HUOC_BACK.Users.domain.model.User;
+import br.com.HUOC_BACK.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.stereotype.Repository;

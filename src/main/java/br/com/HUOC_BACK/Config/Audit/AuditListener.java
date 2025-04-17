@@ -1,7 +1,7 @@
 package br.com.HUOC_BACK.Config.Audit;
 
 
-import br.com.HUOC_BACK.Users.domain.model.User;
+import br.com.HUOC_BACK.model.User;
 import org.hibernate.envers.RevisionListener;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

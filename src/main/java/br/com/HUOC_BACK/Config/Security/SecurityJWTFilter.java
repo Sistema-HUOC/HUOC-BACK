@@ -1,6 +1,6 @@
 package br.com.HUOC_BACK.Config.Security;
 
-import br.com.HUOC_BACK.Users.domain.repository.UserRepository;
+import br.com.HUOC_BACK.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
