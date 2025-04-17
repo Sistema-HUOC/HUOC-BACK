@@ -1,6 +1,6 @@
 package br.com.HUOC_BACK.controller;
 
-import br.com.HUOC_BACK.Config.Security.TokenService;
+import br.com.HUOC_BACK.config.security.TokenService;
 import br.com.HUOC_BACK.controller.dto.login.UserLoginDTO;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
