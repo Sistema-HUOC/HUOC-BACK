@@ -1,17 +1,17 @@
 package br.com.HUOC_BACK.Users.domain.model;
 
 import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Audited
 @Table(name = "users")
-public class User implements UserDetails {
+public class User  implements UserDetails {
     public User(){
 
     }
@@ -39,5 +39,8 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
+    }
+    public UUID getId() {
+        return id;
     }
 }
