@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.envers.Audited;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -35,5 +36,12 @@ public class FormularioSintomatologia {
     private String observacoes;
 
     private String id_Paciente;
+
+    @OneToMany(mappedBy = "formularioSintomatologia", cascade = CascadeType.ALL)
+    private List<DocumentoExameLaboratorial> documentosExame;
+
+    @OneToMany(mappedBy = "formularioSintomatologia", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Sintoma> sintomas;
+
 
 }
