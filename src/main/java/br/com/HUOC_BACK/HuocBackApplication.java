@@ -1,7 +1,7 @@
 package br.com.HUOC_BACK;
 
 import br.com.HUOC_BACK.model.User;
-import br.com.HUOC_BACK.repository.IUserRepository;
+import br.com.HUOC_BACK.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,9 +18,9 @@ public class HuocBackApplication {
 
 	@Bean
 	@Profile("dev")
-	public CommandLineRunner devProfile(IUserRepository IUserRepository, PasswordEncoder encoder){
+	public CommandLineRunner devProfile(UserRepository userRepository, PasswordEncoder encoder){
 		return args -> {
-				IUserRepository.save(new User("Roberto","123.123.123-22","admin@email.com",encoder.encode("123")));
+				userRepository.save(new User("admin@email.com",encoder.encode("123")));
 		};
 	}
 }

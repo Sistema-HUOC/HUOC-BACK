@@ -3,6 +3,7 @@ package br.com.HUOC_BACK.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.envers.Audited;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,6 +13,14 @@ import java.util.UUID;
 @Audited
 @Table(name = "docExameLaboratorial")
 public class DocumentoExameLaboratorial {
+
+    public DocumentoExameLaboratorial() {}
+
+    public DocumentoExameLaboratorial(String nome, byte[] imagem, LocalDateTime data) {
+        this.nome = nome;
+        this.imagem = imagem;
+        this.data = data;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,4 +39,6 @@ public class DocumentoExameLaboratorial {
     @ManyToOne
     @JoinColumn(name = "id_formSintomatologia", nullable = false)
     private FormularioSintomatologia formularioSintomatologia;
+
+
 }

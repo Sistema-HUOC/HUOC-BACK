@@ -1,6 +1,7 @@
 package br.com.HUOC_BACK.repository;
 
-import br.com.HUOC_BACK.model.DocumentoExameLaboratorial;
+
+import br.com.HUOC_BACK.model.CategoriaSintoma;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.stereotype.Repository;
@@ -8,5 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface DocumentoExameLaboratorialRepository extends JpaRepository<DocumentoExameLaboratorial, UUID>, RevisionRepository<DocumentoExameLaboratorial,UUID,Integer> {
+public interface CategoriaSintomaRepository extends JpaRepository<CategoriaSintoma, UUID>, RevisionRepository<CategoriaSintoma,UUID,Integer> {
 }
+
