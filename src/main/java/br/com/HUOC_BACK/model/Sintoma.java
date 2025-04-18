@@ -3,7 +3,6 @@ package br.com.HUOC_BACK.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.envers.Audited;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -33,5 +32,4 @@ public class Sintoma {
     @ManyToOne
     @JoinColumn(name = "id_formularioSintomatologia", nullable = false)
     private FormularioSintomatologia formularioSintomatologia;
-
 }
