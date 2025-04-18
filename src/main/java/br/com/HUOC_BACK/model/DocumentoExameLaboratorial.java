@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.envers.Audited;
 import org.springframework.cglib.core.Local;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -39,6 +38,4 @@ public class DocumentoExameLaboratorial {
     @ManyToOne
     @JoinColumn(name = "id_formSintomatologia", nullable = false)
     private FormularioSintomatologia formularioSintomatologia;
-
-
 }
