@@ -2,9 +2,13 @@ package br.com.HUOC_BACK.model;
 import jakarta.persistence.*;
 import org.hibernate.envers.Audited;
 import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Audited
+@Getter
+@Setter
 @Table(name = "categoriaExames")
 public class CategoriaExame {
 
@@ -18,20 +22,4 @@ public class CategoriaExame {
     private UUID id;
     @Column(nullable = false)
     private String nomeCategoriaExame;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getNomeCategoriaExame() {
-        return nomeCategoriaExame;
-    }
-
-    public void setNomeCategoriaExame(String nomeCategoriaExame) {
-        this.nomeCategoriaExame = nomeCategoriaExame;
-    }
 }

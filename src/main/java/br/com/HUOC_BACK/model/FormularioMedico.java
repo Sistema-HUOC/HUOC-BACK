@@ -3,9 +3,13 @@ import jakarta.persistence.*;
 import org.hibernate.envers.Audited;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Audited
+@Getter
+@Setter
 @Table(name = "formularioMedicos")
 public class FormularioMedico {
 
@@ -25,36 +29,4 @@ public class FormularioMedico {
     private String observacoesAdicionaisFormularioMedico;
     @Column(nullable = false)
     private String id_Medico;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
-
-    public String getObservacoesAdicionaisFormularioMedico() {
-        return observacoesAdicionaisFormularioMedico;
-    }
-
-    public void setObservacoesAdicionaisFormularioMedico(String observacoesAdicionaisFormularioMedico) {
-        this.observacoesAdicionaisFormularioMedico = observacoesAdicionaisFormularioMedico;
-    }
-
-    public String getId_Medico() {
-        return id_Medico;
-    }
-
-    public void setId_Medico(String id_Medico) {
-        this.id_Medico = id_Medico;
-    }
 }
