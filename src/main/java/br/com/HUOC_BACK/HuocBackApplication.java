@@ -20,7 +20,7 @@ public class HuocBackApplication {
 	@Profile("dev")
 	public CommandLineRunner devProfile(IUserRepository IUserRepository, PasswordEncoder encoder){
 		return args -> {
-				IUserRepository.save(new User("admin@email.com",encoder.encode("123")));
+				IUserRepository.save(new User("Roberto","123.123.123-22","admin@email.com",encoder.encode("123")));
 		};
 	}
 }
