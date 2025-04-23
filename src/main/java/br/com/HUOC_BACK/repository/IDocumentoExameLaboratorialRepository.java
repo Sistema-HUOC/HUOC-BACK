@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface DocumentoExameLaboratorialRepository extends JpaRepository<DocumentoExameLaboratorial, UUID>, RevisionRepository<DocumentoExameLaboratorial,UUID,Integer> {
+public interface IDocumentoExameLaboratorialRepository extends JpaRepository<DocumentoExameLaboratorial, UUID>, RevisionRepository<DocumentoExameLaboratorial,UUID,Integer> {
 }

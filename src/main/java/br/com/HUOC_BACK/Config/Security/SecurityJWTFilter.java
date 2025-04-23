@@ -1,6 +1,6 @@
 package br.com.HUOC_BACK.Config.Security;
 
-import br.com.HUOC_BACK.repository.UserRepository;
+import br.com.HUOC_BACK.repository.IUserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -18,9 +18,9 @@ import java.util.Objects;
 @Component
 public class SecurityJWTFilter extends OncePerRequestFilter {
     private final TokenService tokenService;
-    private final UserRepository userRepository;
+    private final IUserRepository userRepository;
 
-    public SecurityJWTFilter(TokenService tokenService, UserRepository userRepository) {
+    public SecurityJWTFilter(TokenService tokenService, IUserRepository userRepository) {
         this.tokenService = tokenService;
         this.userRepository = userRepository;
     }

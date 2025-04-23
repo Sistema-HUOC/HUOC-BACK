@@ -16,11 +16,11 @@ public class FormularioSintomatologia {
 
     public FormularioSintomatologia(){}
 
-    public FormularioSintomatologia(LocalDateTime data, int numProntuario, String observacoes, String id_Paciente){
+    public FormularioSintomatologia(LocalDateTime data, int numProntuario, String observacoes, Paciente paciente){
         this.data = data;
         this.numProntuario = numProntuario;
         this.observacoes = observacoes;
-        this.id_Paciente = id_Paciente;
+        this.paciente = paciente;
     }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,13 +35,12 @@ public class FormularioSintomatologia {
     @Column(nullable = false, length = 355)
     private String observacoes;
 
-    private String id_Paciente;
+    @OneToOne(mappedBy = "formularioSintomatologia", cascade = CascadeType.ALL)
+    private Paciente paciente;
 
     @OneToMany(mappedBy = "formularioSintomatologia", cascade = CascadeType.ALL)
     private List<DocumentoExameLaboratorial> documentosExame;
 
     @OneToMany(mappedBy = "formularioSintomatologia", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Sintoma> sintomas;
-
-
 }
