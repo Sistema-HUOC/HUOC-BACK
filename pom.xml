@@ -8,10 +8,10 @@
 		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com</groupId>
-	<artifactId>HUOC-BACK</artifactId>
+	<groupId>br.edu.upe</groupId>
+	<artifactId>huocbackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HUOC-BACK</name>
+	<name>huocbackend</name>
 	<description>Sistema de Coleta de Dados Clínicos</description>
 	<url/>
 	<licenses>
