@@ -18,10 +18,19 @@ public class HuocBackApplication {
 	}
 
 	@Bean
-	@Profile("dev")
-	public CommandLineRunner devProfile(IUserRepository userRepository, PasswordEncoder encoder){
+	@Profile("prod")
+	public CommandLineRunner devProfile(IUserRepository userRepository, PasswordEncoder encoder) {
 		return args -> {
-				userRepository.save(new User("Jurema","333.666.777-13","admin@email.com",encoder.encode("123"), AcessLevel.ADMINISTRATOR));
+			if (userRepository.findByEmail("admin@email.com").isEmpty()) {
+				userRepository.save(new User(
+						"Jurema",
+						"333.666.777-13",
+						"admin@email.com",
+						encoder.encode("123"),
+						AcessLevel.ADMINISTRATOR
+				));
+			}
 		};
 	}
+
 }
