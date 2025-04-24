@@ -18,9 +18,9 @@ public class HuocBackApplication {
 
 	@Bean
 	@Profile("dev")
-	public CommandLineRunner devProfile(IUserRepository IUserRepository, PasswordEncoder encoder){
+	public CommandLineRunner devProfile(IUserRepository userRepository, PasswordEncoder encoder){
 		return args -> {
-				IUserRepository.save(new User("admin@email.com",encoder.encode("123")));
+				userRepository.save(new User("admin@email.com",encoder.encode("123")));
 		};
 	}
 }
