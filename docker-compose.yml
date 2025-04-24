@@ -4,6 +4,10 @@ services:
     build: .
     ports:
       - "8080:8080"
+    depends_on:
+      - db
+    # networks:
+    #   - mynetwork
   db:
     image: mysql
     environment:
@@ -12,3 +16,8 @@ services:
       MYSQL_DATABASE: huoc_db
     ports:
       - "3306:3306"
+#     networks:
+#       - mynetwork
+# networks:
+#   mynetwork:
+#     driver: bridge
