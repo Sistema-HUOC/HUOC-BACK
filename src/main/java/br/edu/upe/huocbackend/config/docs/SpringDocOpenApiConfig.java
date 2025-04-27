@@ -30,7 +30,7 @@ public class SpringDocOpenApiConfig {
                 .components(new Components()
                         .addSecuritySchemes(securitySchemeName,
                                 new SecurityScheme()
-                                        .name("jwt") // nome do cookie que carrega o token
+                                        .name("jwt")
                                         .type(SecurityScheme.Type.APIKEY)
                                         .in(SecurityScheme.In.COOKIE)
                                         .description("JWT armazenado em cookie")

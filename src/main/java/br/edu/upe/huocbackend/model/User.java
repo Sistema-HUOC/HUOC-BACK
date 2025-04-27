@@ -1,7 +1,9 @@
 package br.edu.upe.huocbackend.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.envers.Audited;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +17,8 @@ import java.util.UUID;
 @Audited
 @Table(name = "users")
 @NoArgsConstructor
+@Getter
+@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User  implements UserDetails {
 
@@ -85,8 +89,5 @@ public class User  implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
-    }
-    public UUID getId() {
-        return id;
     }
 }
