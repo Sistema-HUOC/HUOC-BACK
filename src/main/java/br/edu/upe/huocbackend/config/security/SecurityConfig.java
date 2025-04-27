@@ -25,10 +25,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->{
                     auth
                             .requestMatchers("/api/user/login").permitAll()
+                            .requestMatchers("/swagger-ui/**").permitAll()
+                            .requestMatchers("/swagger-ui.html").permitAll()
+                            .requestMatchers("/v3/api-docs/**").permitAll()
+                            .requestMatchers("/api-docs/**").permitAll()
                             .requestMatchers("/h2-console/**").permitAll()
-                            .requestMatchers("/v3/api-docs/**",
-                                    "/swagger-ui.html",
-                                    "/swagger-ui/**").permitAll()
                     .anyRequest().authenticated();
                 })
                 .headers(header -> {
