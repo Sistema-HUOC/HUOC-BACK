@@ -1,13 +1,11 @@
-FROM openjdk:17-alpine
-
+FROM openjdk:17-alpine AS base
 WORKDIR app
-
-COPY . .
 RUN apk add --no-cache maven
-RUN mvn install
 
-CMD mvn spring-boot:run
+FROM base AS build
+COPY . .
+RUN mvn install -DskipTests
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/HUOC-BACK-0.0.1-SNAPSHOT.jar"]
+CMD ["mvn", "spring-boot:run"]
