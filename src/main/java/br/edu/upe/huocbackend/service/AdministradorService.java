@@ -6,7 +6,6 @@ import br.edu.upe.huocbackend.model.AcessLevel;
 import br.edu.upe.huocbackend.model.Administrador;
 import br.edu.upe.huocbackend.repository.IAdministradorRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -24,12 +24,12 @@ public class UserCreateDto {
     @NotBlank
     public String cpf;
 
-    @Schema(description = "User email address", example = "user@example.com", required = true)
+    @Schema(description = "Email do Usuario", example = "user@example.com", required = true)
     @Email
     @NotBlank
     public String email;
 
-    @Schema(description = "User password", example = "password123", required = true)
+    @Schema(description = "Senha do Usuario", example = "password123", required = true)
     @NotBlank
     public String password;
 }
