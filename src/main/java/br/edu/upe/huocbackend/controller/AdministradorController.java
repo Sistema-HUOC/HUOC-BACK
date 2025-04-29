@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/adm")
-@Tag(name = "Adminastror")
-public class AdminastrorController {
+@Tag(name = "Administrador")
+public class AdministradorController {
 
     private final AdministradorService administradorService;
 
-    public AdminastrorController(AdministradorService administradorService) {
+    public AdministradorController(AdministradorService administradorService) {
         this.administradorService = administradorService;
     }
 

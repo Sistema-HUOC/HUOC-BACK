@@ -1,7 +1,7 @@
 package br.edu.upe.huocbackend.service;
 
 import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDto;
-import br.edu.upe.huocbackend.exception.AdministradirException;
+import br.edu.upe.huocbackend.exception.AdministradorException;
 import br.edu.upe.huocbackend.model.AcessLevel;
 import br.edu.upe.huocbackend.model.Administrador;
 import br.edu.upe.huocbackend.repository.IAdministradorRepository;
@@ -59,7 +59,7 @@ class AdministradorServiceTest {
                 .thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(AdministradirException.class, () -> {
+        assertThrows(AdministradorException.class, () -> {
             administradorService.findByEmail("naoexiste@email.com");
         });
     }
@@ -89,7 +89,7 @@ class AdministradorServiceTest {
                 .thenReturn(true);
 
         // Assert
-        assertThrows(AdministradirException.class, () -> {
+        assertThrows(AdministradorException.class, () -> {
             administradorService.save(new AdministradorCreateDto(
                     administrador1.getNome(),
                     administrador1.getCpf(),
