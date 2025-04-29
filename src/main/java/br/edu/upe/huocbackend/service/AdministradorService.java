@@ -41,7 +41,7 @@ public class AdministradorService {
     public void adminCreateEnfermagem(EnfermagemCreateDTO enfermagem) {
         Boolean admin = enfermagemRepository.existsByEmail(enfermagem.email);
         if(admin) {
-            throw new EnfermagemException("Administrador já cadastrado");
+            throw new EnfermagemException("Enfermeiro(a) já cadastrado(a)");
         }
         enfermagemRepository.save(new Enfermagem(enfermagem.nome,enfermagem.cpf,
                 enfermagem.email,enfermagem.password, AcessLevel.ENFERMAGEM, enfermagem.coren));
