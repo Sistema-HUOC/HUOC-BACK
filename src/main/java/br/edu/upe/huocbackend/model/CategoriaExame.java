@@ -4,6 +4,7 @@ import org.hibernate.envers.Audited;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 
 @Entity
 @Audited
@@ -20,6 +21,11 @@ public class CategoriaExame {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
     @Column(nullable = false)
     private String nomeCategoriaExame;
+
+    @OneToMany(mappedBy = "CategoriaExame")
+    private List<ExameLaboratorial> exames;
+
 }

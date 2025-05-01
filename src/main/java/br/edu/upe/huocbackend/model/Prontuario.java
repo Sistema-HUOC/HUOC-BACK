@@ -18,7 +18,6 @@ public class Prontuario {
 	public Prontuario() {
 		// TODO Auto-generated constructor stub
 	}
-
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id; 

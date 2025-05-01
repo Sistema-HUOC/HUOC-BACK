@@ -35,7 +35,8 @@ public class FormularioSintomatologia {
     @Column(nullable = false, length = 355)
     private String observacoes;
 
-    @OneToOne(mappedBy = "formularioSintomatologia", cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "idPaciente")
     private Paciente paciente;
 
     @OneToMany(mappedBy = "formularioSintomatologia", cascade = CascadeType.ALL)

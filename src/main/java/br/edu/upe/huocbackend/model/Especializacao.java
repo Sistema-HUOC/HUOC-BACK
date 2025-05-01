@@ -1,14 +1,12 @@
 package br.edu.upe.huocbackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
+import java.util.List;
 import java.util.UUID;
 @Entity
 @Audited
@@ -22,6 +20,9 @@ public class Especializacao {
     private UUID id;
 
     private String tipoEspecializacao;
+
+    @OneToMany(mappedBy = "especializacao")
+    private List<Medico> medicos;
 
     public Especializacao(String tipoEspecializacao) {
         this.tipoEspecializacao = tipoEspecializacao;
