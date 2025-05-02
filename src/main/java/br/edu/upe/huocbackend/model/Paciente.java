@@ -20,7 +20,7 @@ public class Paciente {
 
     public Paciente(String nome, String cpf, Date dataNasc, String sexo, String numero,
                     String htvl1, String htvl2, Integer numProntuario, Endereco endereco,
-                    String idEnfermagem) {
+                    Enfermagem enfermagem) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
@@ -30,7 +30,7 @@ public class Paciente {
         this.htvl2 = htvl2;
         this.numProntuario = numProntuario;
         this.endereco = endereco;
-        this.idEnfermagem = idEnfermagem;
+        this.enfermagem = enfermagem;
     }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,8 +60,9 @@ public class Paciente {
     @Column(nullable = false)
     private Integer numProntuario;
 
-    @Column(nullable = false)
-    private String idEnfermagem;
+    @ManyToOne
+    @JoinColumn(name = "idEnfermagem")
+    private Enfermagem enfermagem;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = false)
@@ -70,7 +71,6 @@ public class Paciente {
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private List<Exame> exames;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idFormularioSintomatologia", nullable = false)
-    private FormularioSintomatologia formularioSintomatologia;
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+    private List<FormularioSintomatologia> formularioSintomatologia;
 }

@@ -2,6 +2,7 @@ package br.edu.upe.huocbackend.model;
 import jakarta.persistence.*;
 import org.hibernate.envers.Audited;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,18 +16,31 @@ public class FormularioMedico {
 
     public FormularioMedico() {}
 
-    public FormularioMedico(LocalDateTime data, String observacoesAdicionaisFormularioMedico, String id_Medico) {
+    public FormularioMedico(LocalDateTime data, String observacoesAdicionaisFormularioMedico, Medico medico) {
         this.data = data;
         this.observacoesAdicionaisFormularioMedico = observacoesAdicionaisFormularioMedico;
-        this.id_Medico = id_Medico;
+        this.medico = medico;
     }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
     @Column(nullable = false)
     private LocalDateTime data;
+
     @Column(nullable = false)
     private String observacoesAdicionaisFormularioMedico;
-    @Column(nullable = false)
-    private String id_Medico;
+
+    @ManyToOne
+    @JoinColumn(name = "idMedico")
+    private Medico medico;
+
+    @OneToMany(mappedBy = "formularioMedico")
+    private List<DocumentoResultadoLaboratorial> documentoResultadoLaboratoriais;
+
+    @OneToMany(mappedBy = "formularioMedico")
+    private List<ExameLaboratorial> exameLaboratoriais;
+
+    @OneToMany(mappedBy = "formularioMedico")
+    private List<Prontuario> prontuarios;
 }

@@ -15,30 +15,39 @@ public class ExameLaboratorial {
     public ExameLaboratorial() {}
 
     public ExameLaboratorial(String name, String unidade, String referencia, String interpretacao,
-                             String id_FormularioMedico, String id_CategoriaExame,String resultado ) {
+                             FormularioMedico idFormularioMedico, CategoriaExame idCategoriaExame,String resultado ) {
         this.name = name;
         this.unidade = unidade;
         this.referencia = referencia;
         this.interpretacao = interpretacao;
-        this.id_FormularioMedico = id_FormularioMedico;
-        this.id_CategoriaExame = id_CategoriaExame;
+        this.formularioMedico = idFormularioMedico;
+        this.categoriaExame = idCategoriaExame;
         this.resultado = resultado;
     }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String unidade;
+
     @Column(nullable = false)
     private String referencia;
+
     @Column(nullable = false)
     private String interpretacao;
-    @Column(nullable = false)
-    private String id_FormularioMedico;
-    @Column(nullable = false)
-    private String id_CategoriaExame;
+
+    @ManyToOne
+    @JoinColumn(name = "idFormularioMedico")
+    private FormularioMedico formularioMedico;
+
+    @ManyToOne
+    @JoinColumn(name = "idCategoriaExame")
+    private CategoriaExame categoriaExame;
+
     @Column(nullable = false)
     private String resultado;
 }
