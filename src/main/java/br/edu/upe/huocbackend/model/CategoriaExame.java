@@ -25,7 +25,7 @@ public class CategoriaExame {
     @Column(nullable = false)
     private String nomeCategoriaExame;
 
-    @OneToMany(mappedBy = "CategoriaExame")
+    @OneToMany(mappedBy = "categoriaExame")
     private List<ExameLaboratorial> exames;
 
 }
