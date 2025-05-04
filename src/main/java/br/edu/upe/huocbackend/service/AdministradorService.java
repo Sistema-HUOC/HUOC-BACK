@@ -4,6 +4,7 @@ import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDt
 import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
 import br.edu.upe.huocbackend.exception.AdministradirException;
 import br.edu.upe.huocbackend.exception.EnfermagemException;
+import br.edu.upe.huocbackend.exception.AdministradorException;
 import br.edu.upe.huocbackend.model.AcessLevel;
 import br.edu.upe.huocbackend.model.Administrador;
 import br.edu.upe.huocbackend.model.Enfermagem;
@@ -24,14 +25,14 @@ public class AdministradorService {
     }
 
     public Administrador findByEmail(String email) {
-        return administradorRepository.findByEmail(email).orElseThrow(() -> new AdministradirException("Adiministrador não encontrado"));
+        return administradorRepository.findByEmail(email).orElseThrow(() -> new AdministradorException("Adiministrador não encontrado"));
     }
 
     @Transactional
     public void save(AdministradorCreateDto administrador) {
         Boolean admin = administradorRepository.existsByEmail(administrador.email);
         if(admin) {
-            throw new AdministradirException("Administrador já cadastrado");
+            throw new AdministradorException("Administrador já cadastrado");
         }
         administradorRepository.save(new Administrador(administrador.nome,administrador.cpf,
                 administrador.email,administrador.password, AcessLevel.ADMINISTRATOR));

@@ -75,4 +75,5 @@ public class AdministradorController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
+
 }

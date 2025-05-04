@@ -1,11 +1,12 @@
 package br.edu.upe.huocbackend.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
+
+import java.util.List;
 
 @Entity
 @Audited
@@ -21,4 +22,7 @@ public class Enfermagem extends User{
         super(nome, cpf, email, password, level);
         this.coren = coren;
     }
+
+    @OneToMany(mappedBy = "enfermagem")
+    private List<Paciente> pacientes;
 }
