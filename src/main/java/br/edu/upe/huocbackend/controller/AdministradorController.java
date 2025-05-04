@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/adm")
-@Tag(name = "Adminastror")
+@Tag(name = "Administrador")
 public class AdministradorController {
 
     private final AdministradorService administradorService;
@@ -55,7 +55,7 @@ public class AdministradorController {
     @ApiResponse(responseCode = "201", description = "Enfermeiro(a) criado com sucesso")
     @ApiResponse(responseCode = "400", description = "Campos obrigatórios ausentes")
     @ApiResponse(responseCode = "409", description = "Usuário com este e-mail ou CPF já existe")
-    @PostMapping("/api/adm/enfermeiro")
+    @PostMapping("enfermeiro")
     public  ResponseEntity<String> AdminCreateEnfermeiro(@Valid @RequestBody EnfermagemCreateDTO enfermeiroDto, HttpServletResponse response) {
         if (enfermeiroDto.getEmail() == null || enfermeiroDto.getEmail().isEmpty()) {
             return ResponseEntity.badRequest().body("O e-mail é obrigatório");
