@@ -81,6 +81,10 @@ public class User  implements UserDetails {
         }
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     @Override
     public String getPassword() {
         return this.password;
@@ -90,4 +94,6 @@ public class User  implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
+
 }
