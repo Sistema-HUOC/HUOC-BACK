@@ -32,4 +32,5 @@ public class Pesquisador extends User {
         this.instituicao = instituicao;
         this.areasAtuacao = areasAtuacao;
     }
+
 }

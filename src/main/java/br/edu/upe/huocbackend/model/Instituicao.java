@@ -29,4 +29,8 @@ public class Instituicao {
         this.nomeInstituicao = nomeInstituicao;
         this.pesquisadores = pesquisadores;
     }
+
+    public Instituicao(String nomeInstituicao) {
+        this.nomeInstituicao = nomeInstituicao;
+    }
 }
