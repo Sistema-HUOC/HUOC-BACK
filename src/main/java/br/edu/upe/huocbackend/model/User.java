@@ -57,7 +57,7 @@ public class User  implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         switch (this.acessLevel) {
-            case ADMINISTRATOR:
+            case ADMINISTRADOR:
                 return List.of(
                         new SimpleGrantedAuthority("ROLE_ADMIN"),
                         new SimpleGrantedAuthority("ROLE_MEDICO"),
