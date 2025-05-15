@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Audited
@@ -17,7 +18,7 @@ public class AreaAtuacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     private String nomeArea;
 
