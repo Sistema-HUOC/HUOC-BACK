@@ -30,6 +30,7 @@ public class SecurityConfig {
                             .requestMatchers("/v3/api-docs/**").permitAll()
                             .requestMatchers("/api-docs/**").permitAll()
                             .requestMatchers("/h2-console/**").permitAll()
+                            .requestMatchers("/api/adm/**").hasRole("ADMINISTRADOR")
                     .anyRequest().authenticated();
                 })
                 .headers(header -> {

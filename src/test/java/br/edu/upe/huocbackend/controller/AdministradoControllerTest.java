@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -48,7 +47,7 @@ class AdministradorControllerTest {
 
 
     @Test
-    @WithMockUser("ADMINISTRATOR")
+    @WithMockUser("ADMINISTRADOR")
     void deveCriarEnfermeiroComSucesso() throws Exception {
         EnfermagemCreateDTO dto = new EnfermagemCreateDTO("Maria", "78452338031", "maria@email.com", "senha123", "123456-PE");
 
@@ -60,7 +59,7 @@ class AdministradorControllerTest {
         verify(administradorService, times(1)).adminCreateEnfermagem(any(EnfermagemCreateDTO.class));
     }
 
-    @WithMockUser("ADMINISTRATOR")
+    @WithMockUser("ADMINISTRADOR")
     @Test
     void deveRetornar400QuandoEmailForVazio() throws Exception {
         EnfermagemCreateDTO dto = new EnfermagemCreateDTO("Maria", "78452338031", "", "senha123", "123456-PE");
@@ -73,7 +72,7 @@ class AdministradorControllerTest {
         verify(administradorService, never()).adminCreateEnfermagem(any());
     }
 
-    @WithMockUser("ADMINISTRATOR")
+    @WithMockUser("ADMINISTRADOR")
     @Test
     void deveRetornar400QuandoSenhaForVazia() throws Exception {
         EnfermagemCreateDTO dto = new EnfermagemCreateDTO("Maria", "78452338031", "maria@email.com", "", "123456-PE");
@@ -86,7 +85,7 @@ class AdministradorControllerTest {
         verify(administradorService, never()).adminCreateEnfermagem(any());
     }
 
-    @WithMockUser("ADMINISTRATOR")
+    @WithMockUser("ADMINISTRADOR")
     @Test
     void deveRetornar400QuandoCorenForVazio() throws Exception {
         EnfermagemCreateDTO dto = new EnfermagemCreateDTO("Maria", "78452338031", "maria@email.com", "senha123", "");
@@ -99,7 +98,7 @@ class AdministradorControllerTest {
         verify(administradorService, never()).adminCreateEnfermagem(any());
     }
 
-    @WithMockUser("ADMINISTRATOR")
+    @WithMockUser("ADMINISTRADOR")
     @Test
     void deveRetornar409QuandoEnfermeiroJaExiste() throws Exception {
         EnfermagemCreateDTO dto = new EnfermagemCreateDTO("Maria", "78452338031", "maria@email.com", "senha123", "123456-PE");
