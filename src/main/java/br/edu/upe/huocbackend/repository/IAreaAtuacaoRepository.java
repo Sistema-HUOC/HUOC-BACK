@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface IAreaAtuacaoRepository extends JpaRepository<AreaAtuacao, UUID>, RevisionRepository<AreaAtuacao, UUID, Integer> {
+
 }

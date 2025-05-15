@@ -1,6 +1,7 @@
 package br.edu.upe.huocbackend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class AreaAtuacao {
 
     @Id
@@ -28,5 +30,10 @@ public class AreaAtuacao {
     public AreaAtuacao(String nomeArea, List<Pesquisador> pesquisadores) {
         this.nomeArea = nomeArea;
         this.pesquisadores = pesquisadores;
+    }
+
+
+    public AreaAtuacao(String nomeArea) {
+        this.nomeArea = nomeArea;
     }
 }
