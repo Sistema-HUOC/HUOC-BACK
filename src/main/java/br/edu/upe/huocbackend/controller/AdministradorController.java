@@ -2,6 +2,7 @@ package br.edu.upe.huocbackend.controller;
 
 import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDto;
 import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
+import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
 import br.edu.upe.huocbackend.service.AdministradorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -75,5 +76,37 @@ public class AdministradorController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
+
+    @Operation(
+            summary = "Administrador cria Pesquisador(a)",
+            description = "Administrador cria um pesquisador(a) com os detalhes fornecidos"
+    )
+    @ApiResponse(responseCode = "201", description = "Pesquisador  (a) criado com sucesso")
+    @ApiResponse(responseCode = "400", description = "Campos obrigatórios ausentes")
+    @ApiResponse(responseCode = "409", description = "Usuário com este e-mail ou CPF já existe")
+    @PostMapping("pesquisadores")
+    public  ResponseEntity<String> AdminCreatePesquisador(@Valid @RequestBody PesquisadorCreateDto pesquisadorDto, HttpServletResponse response) {
+        try {
+            if (pesquisadorDto.getEmail() == null || pesquisadorDto.getEmail().isEmpty()) {
+                return ResponseEntity.badRequest().body("O e-mail é obrigatório");
+            }
+            if (pesquisadorDto.getPassword() == null || pesquisadorDto.getPassword().isEmpty()) {
+                return ResponseEntity.badRequest().body("A senha é obrigatória");
+            }
+            if (pesquisadorDto.getIdInstituicao() == null) {
+                return ResponseEntity.badRequest().body("A instituição é obrigatória");
+            }
+
+            if (pesquisadorDto.getIdAreasAtuacao() == null || pesquisadorDto.getIdAreasAtuacao().isEmpty()) {
+                return ResponseEntity.badRequest().body("Pelo menos uma área de atuação deve ser informada");
+            }
+
+            administradorService.adminCreatePesquisador(pesquisadorDto);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+    }
+
 
 }
