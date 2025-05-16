@@ -1,63 +1,47 @@
 package br.edu.upe.huocbackend.controller.dto.paciente;
 
 import br.edu.upe.huocbackend.model.Endereco;
-import br.edu.upe.huocbackend.model.Enfermagem;
-import br.edu.upe.huocbackend.model.Exame;
-import br.edu.upe.huocbackend.model.FormularioSintomatologia;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.time.LocalDate;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Schema(description = "PacienteCreateDTO")
 public class PacienteCreateDTO {
-
-    public UUID id;
-
     @NotBlank
     public String nome;
-
-    @NotBlank
-    @CPF
+    @NotBlank @CPF
     public String cpf;
-
     @NotBlank
-    public Date dataNasc;
-
+    public LocalDate dataNasc;
     @NotBlank
     public String sexo;
-
     @NotBlank
-    public String numero;
-
-    @NotBlank
-    public String htvl1;
-
-    @NotBlank
-    public String htvl2;
-
-    @NotBlank
+    public String telefone;
+    @NotNull
+    public Endereco endereco;
+    @NotNull
+    public Boolean htvl1;
+    @NotNull
+    public Boolean htvl2;
+    @NotNull
     public Integer numProntuario;
 
-    public Enfermagem enfermagem;
-
-    public Endereco endereco;
-
-    public List<Exame> exames;
-
-    public List<FormularioSintomatologia> formularioSintomatologia;
-
-    public PacienteCreateDTO(String nome, String cpf, Date dataNasc, String sexo, String numero, String htvl1, String htvl2, Integer numProntuario,
-                             Enfermagem enfermagem, Endereco endereco, List<Exame> exames, List<FormularioSintomatologia> formularioSintomatologia) {
-        this(null, nome, cpf, dataNasc, sexo, numero, htvl1, htvl2, numProntuario, enfermagem, endereco, exames, formularioSintomatologia);
+    public PacienteCreateDTO(String nome, String cpf, LocalDate dataNasc, String sexo, String telefone, Boolean htvl1, Boolean htvl2, Endereco endereco, Integer numProntuario) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNasc = dataNasc;
+        this.sexo = sexo;
+        this.telefone = telefone;
+        this.htvl1 = htvl1;
+        this.htvl2 = htvl2;
+        this.endereco = endereco;
+        this.numProntuario = numProntuario;
     }
 }
