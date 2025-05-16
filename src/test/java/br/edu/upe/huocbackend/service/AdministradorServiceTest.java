@@ -2,7 +2,11 @@ package br.edu.upe.huocbackend.service;
 
 import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDto;
 import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
+<<<<<<< HEAD
+import br.edu.upe.huocbackend.exception.EnfermagemException;
+=======
 import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
+>>>>>>> 769a7a79d3aa6faf9907a904f47a2377854f5e60
 import br.edu.upe.huocbackend.exception.AdministradorException;
 import br.edu.upe.huocbackend.exception.EnfermagemException;
 import br.edu.upe.huocbackend.exception.PesquisadorException;

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,19 +18,17 @@ import java.util.UUID;
 @Table(name = "Paciente")
 public class Paciente {
 
-    public Paciente(String nome, String cpf, Date dataNasc, String sexo, String numero,
-                    String htvl1, String htvl2, Integer numProntuario, Endereco endereco,
-                    Enfermagem enfermagem) {
+    public Paciente(String nome, String cpf, LocalDate dataNasc, String sexo, String telefone,
+                    Boolean htvl1, Boolean htvl2, Integer numProntuario, Endereco endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
         this.sexo = sexo;
-        this.numero = numero;
+        this.telefone = telefone;
         this.htvl1 = htvl1;
         this.htvl2 = htvl2;
         this.numProntuario = numProntuario;
         this.endereco = endereco;
-        this.enfermagem = enfermagem;
     }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,19 +41,19 @@ public class Paciente {
     private String cpf;
 
     @Column(nullable = false)
-    private Date dataNasc;
+    private LocalDate dataNasc;
 
     @Column(nullable = false)
     private String sexo;
 
     @Column(nullable = false)
-    private String numero;
+    private String telefone;
 
     @Column(nullable = false)
-    private String htvl1;
+    private Boolean htvl1;
 
     @Column(nullable = false)
-    private String htvl2;
+    private Boolean htvl2;
 
     @Column(nullable = false)
     private Integer numProntuario;
