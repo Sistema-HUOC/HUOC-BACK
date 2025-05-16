@@ -2,20 +2,31 @@ package br.edu.upe.huocbackend.service;
 
 import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDto;
 import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
+<<<<<<< HEAD
 import br.edu.upe.huocbackend.exception.EnfermagemException;
+=======
+import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
+>>>>>>> 769a7a79d3aa6faf9907a904f47a2377854f5e60
 import br.edu.upe.huocbackend.exception.AdministradorException;
+import br.edu.upe.huocbackend.exception.EnfermagemException;
+import br.edu.upe.huocbackend.exception.PesquisadorException;
 import br.edu.upe.huocbackend.model.AcessLevel;
 import br.edu.upe.huocbackend.model.Administrador;
-import br.edu.upe.huocbackend.repository.IAdministradorRepository;
-import br.edu.upe.huocbackend.repository.IEnfermagemRepository;
+import br.edu.upe.huocbackend.model.AreaAtuacao;
+import br.edu.upe.huocbackend.model.Instituicao;
+import br.edu.upe.huocbackend.repository.*;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,6 +46,13 @@ class AdministradorServiceTest {
 
     private Administrador administrador1;
 
+    @Mock private IPesquisadorRepository pesquisadorRepository;
+    @Mock private IInstituicaoRepository instituicaoRepository;
+    @Mock private IAreaAtuacaoRepository areaAtuacaoRepository;
+    @Mock private PasswordEncoder passwordEncoder;
+
+
+
     @BeforeEach
     public void criaAdministrador() {
         administrador1 = new Administrador();
@@ -42,7 +60,7 @@ class AdministradorServiceTest {
         administrador1.setCpf("123456789");
         administrador1.setEmail("administrador1@email.com");
         administrador1.setPassword("123");
-        administrador1.setAcessLevel(AcessLevel.ADMINISTRATOR);
+        administrador1.setAcessLevel(AcessLevel.ADMINISTRADOR);
     }
 
     @Test
@@ -130,6 +148,91 @@ class AdministradorServiceTest {
 
         assertThrows(EnfermagemException.class, () -> administradorService.adminCreateEnfermagem(dto));
         verify(enfermagemRepository, never()).save(any());
+    }
+
+
+    @Test
+    void deveLancarExcecaoQuandoPesquisadorJaExiste() {
+        PesquisadorCreateDto dto = new PesquisadorCreateDto("Lucas", "12345678900", "lucas@email.com", "senha123", UUID.randomUUID(), List.of());
+        when(pesquisadorRepository.existsByEmail(dto.email)).thenReturn(true);
+
+        assertThrows(PesquisadorException.class, () -> administradorService.adminCreatePesquisador(dto));
+        verify(pesquisadorRepository, never()).save(any());
+    }
+
+    @Test
+    void deveLancarExcecaoQuandoInstituicaoNaoExiste() {
+        UUID idInstituicao = UUID.randomUUID();
+        PesquisadorCreateDto dto = new PesquisadorCreateDto("Lucas", "12345678900", "lucas@email.com", "senha123", idInstituicao, List.of());
+
+        when(pesquisadorRepository.existsByEmail(dto.email)).thenReturn(false);
+        when(instituicaoRepository.findById(idInstituicao)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> administradorService.adminCreatePesquisador(dto));
+        verify(pesquisadorRepository, never()).save(any());
+    }
+
+    @Test
+    void deveSalvarPesquisadorComSucesso() {
+        UUID idInstituicao = UUID.randomUUID();
+        UUID idArea1 = UUID.randomUUID();
+        UUID idArea2 = UUID.randomUUID();
+
+        PesquisadorCreateDto dto = new PesquisadorCreateDto("Lucas", "12345678900", "lucas@email.com", "senha123", idInstituicao, List.of(idArea1, idArea2));
+
+        Instituicao instituicao = new Instituicao();
+        instituicao.setId(idInstituicao);
+        instituicao.setNomeInstituicao("UFPE");
+
+        AreaAtuacao area1 = new AreaAtuacao();
+        area1.setId(idArea1);
+        area1.setNomeArea("Doenças Raras");
+
+        AreaAtuacao area2 = new AreaAtuacao();
+        area2.setId(idArea2);
+        area2.setNomeArea("Epidemiologia");
+
+        when(pesquisadorRepository.existsByEmail(dto.email)).thenReturn(false);
+        when(instituicaoRepository.findById(idInstituicao)).thenReturn(Optional.of(instituicao));
+        when(areaAtuacaoRepository.findAllById(List.of(idArea1, idArea2))).thenReturn(List.of(area1, area2));
+        when(passwordEncoder.encode(dto.password)).thenReturn("senha-hash");
+
+        administradorService.adminCreatePesquisador(dto);
+
+        verify(pesquisadorRepository).save(argThat(p ->
+                p.getNome().equals("Lucas") &&
+                        p.getCpf().equals("12345678900") &&
+                        p.getEmail().equals("lucas@email.com") &&
+                        p.getPassword().equals("senha-hash") &&
+                        p.getAcessLevel().equals(AcessLevel.PESQUISADOR) &&
+                        p.getInstituicao().equals(instituicao) &&
+                        p.getAreasAtuacao().containsAll(List.of(area1, area2))
+        ));
+    }
+
+    @Test
+    void deveLancarExcecaoQuandoAreasNaoSaoEncontradas() {
+        UUID idInstituicao = UUID.randomUUID();
+        UUID idArea1 = UUID.randomUUID();
+        UUID idArea2 = UUID.randomUUID();
+
+        PesquisadorCreateDto dto = new PesquisadorCreateDto("Lucas", "12345678900", "lucas@email.com", "senha123", idInstituicao, List.of(idArea1, idArea2));
+
+        Instituicao instituicao = new Instituicao();
+        instituicao.setId(idInstituicao);
+        instituicao.setNomeInstituicao("UFPE");
+
+        AreaAtuacao area1 = new AreaAtuacao();
+        area1.setId(idArea1);
+        area1.setNomeArea("Doenças Raras");
+
+        when(pesquisadorRepository.existsByEmail(dto.email)).thenReturn(false);
+        when(instituicaoRepository.findById(idInstituicao)).thenReturn(Optional.of(instituicao));
+        when(areaAtuacaoRepository.findAllById(List.of(idArea1, idArea2))).thenReturn(List.of(area1));
+
+        // ⚠️ Lembre-se: seu service deve validar isso explicitamente
+        assertThrows(EntityNotFoundException.class, () -> administradorService.adminCreatePesquisador(dto));
+        verify(pesquisadorRepository, never()).save(any());
     }
 
 }

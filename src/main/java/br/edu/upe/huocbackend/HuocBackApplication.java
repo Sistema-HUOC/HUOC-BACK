@@ -27,7 +27,7 @@ public class HuocBackApplication {
 						"333.666.777-13",
 						"admin@email.com",
 						encoder.encode("123"),
-						AcessLevel.ADMINISTRATOR
+						AcessLevel.ADMINISTRADOR
 				));
 			}
 		};
