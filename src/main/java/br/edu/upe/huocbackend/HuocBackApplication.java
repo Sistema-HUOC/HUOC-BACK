@@ -18,7 +18,7 @@ public class HuocBackApplication {
 	}
 
 	@Bean
-	@Profile({"prod"})
+	@Profile({"dev"})
 	public CommandLineRunner devProfile(IUserRepository userRepository, PasswordEncoder encoder) {
 		return args -> {
 			if (userRepository.findByEmail("admin@email.com").isEmpty()) {
