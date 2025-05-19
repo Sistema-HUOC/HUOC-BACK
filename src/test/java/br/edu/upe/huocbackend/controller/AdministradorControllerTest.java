@@ -6,7 +6,6 @@ import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
 import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
 import br.edu.upe.huocbackend.exception.EnfermagemException;
 import br.edu.upe.huocbackend.exception.PesquisadorException;
-import br.edu.upe.huocbackend.model.AreaAtuacao;
 import br.edu.upe.huocbackend.repository.IUserRepository;
 import br.edu.upe.huocbackend.service.AdministradorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @Import({TokenService.class})
 @ImportAutoConfiguration(classes = {SecurityConfig.class})
-class AdministradorControllerTest {
+public class AdministradorControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
