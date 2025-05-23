@@ -1,11 +1,33 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
+
+import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
+import java.util.UUID;
+
+@Audited
+@Entity
+@Table(name = "cat_musculoesquelitico")
 public class Musculoesqueletico {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private boolean dorArticular;
+
+    @Column(nullable = false)
     private float rigidezMuscular;
+
+    @Column(nullable = false)
     private boolean fraquezaMuscular;
+
+    @Column(nullable = false)
     private boolean articulacaoInchada;
+
+    @Column(nullable = false)
     private String observacao;
 
     public Musculoesqueletico() {}
@@ -17,6 +39,8 @@ public class Musculoesqueletico {
         this.articulacaoInchada = articulacaoInchada;
         this.observacao = observacao;
     }
+
+    public UUID getId() {return id;}
 
     public boolean getDorArticular() {return dorArticular;}
 

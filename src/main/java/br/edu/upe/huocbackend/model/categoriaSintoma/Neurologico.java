@@ -1,14 +1,41 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
+import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
+import java.util.UUID;
+
+@Audited
+@Entity
+@Table(name = "cat_neurologico")
 public class Neurologico {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private boolean dordeCabeça;
+
+    @Column(nullable = false)
     private float confusaoMental;
+
+    @Column(nullable = false)
     private boolean convulsoes;
+
+    @Column(nullable = false)
     private boolean dorNeurotipica;
+
+    @Column(nullable = false)
     private boolean parestesia;
+
+    @Column(nullable = false)
     private boolean paresia;
+
+    @Column(nullable = false)
     private boolean plegia;
+
+    @Column(nullable = false)
     private String observacao;
 
     public Neurologico() {}
@@ -23,6 +50,8 @@ public class Neurologico {
         this.plegia = plegia;
         this.observacao = observacao;
     }
+
+    public UUID getId() {return id;}
 
     public boolean getDordeCabeça() {return dordeCabeça;}
 

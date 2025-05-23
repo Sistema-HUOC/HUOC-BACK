@@ -1,13 +1,38 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
+import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
+import java.util.UUID;
+
+@Audited
+@Entity
+@Table(name = "cat_gastrointestinal")
 public class Gastrointestinal {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private boolean nausea;
+
+    @Column(nullable = false)
     private float diarreia;
+
+    @Column(nullable = false)
     private boolean prisaodeVentre;
+
+    @Column(nullable = false)
     private boolean dorAbdominal;
+
+    @Column(nullable = false)
     private boolean perdadeApetite;
+
+    @Column(nullable = false)
     private boolean constipação;
+
+    @Column(nullable = false)
     private String observacao;
 
     public Gastrointestinal() {}
@@ -21,6 +46,8 @@ public class Gastrointestinal {
         this.constipação = constipação;
         this.observacao = observacao;
     }
+
+    public UUID getId() {return id;}
 
     public boolean getNausea() {return nausea;}
 

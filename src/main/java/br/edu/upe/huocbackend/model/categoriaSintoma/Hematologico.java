@@ -1,10 +1,30 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
+
+import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
+import java.util.UUID;
+
+@Audited
+@Entity
+@Table(name = "cat_hematologico")
 public class Hematologico {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private boolean sangramentoAnormal;
+
+    @Column(nullable = false)
     private float hematomasFaceis;
+
+    @Column(nullable = false)
     private boolean palides;
+
+    @Column(nullable = false)
     private String observacao;
 
     public Hematologico() {}
@@ -15,6 +35,8 @@ public class Hematologico {
         this.palides = palides;
         this.observacao = observacao;
     }
+
+    public UUID getId() {return id;}
 
     public boolean getSangramentoAnormal() {return sangramentoAnormal;}
 

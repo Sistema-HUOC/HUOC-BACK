@@ -1,11 +1,33 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
+
+import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
+import java.util.UUID;
+
+@Audited
+@Entity
+@Table(name = "cat_psiquatrico")
 public class Psiquiatrico {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private boolean ansiedade;
+
+    @Column(nullable = false)
     private float depressao;
+
+    @Column(nullable = false)
     private boolean alucinacao;
+
+    @Column(nullable = false)
     private boolean insonia;
+
+    @Column(nullable = false)
     private String observacao;
 
     public Psiquiatrico() {}
@@ -17,6 +39,8 @@ public class Psiquiatrico {
         this.insonia = insonia;
         this.observacao = observacao;
     }
+
+    public UUID getId() {return id;}
 
     public boolean getAnsiedade() {
         return ansiedade;

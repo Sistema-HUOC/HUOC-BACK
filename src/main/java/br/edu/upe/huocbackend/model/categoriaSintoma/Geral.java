@@ -1,13 +1,39 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
+
+import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
+import java.util.UUID;
+
+@Audited
+@Entity
+@Table(name = "cat_geral")
 public class Geral {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private boolean febre;
+
+    @Column(nullable = false)
     private float temperatura;
+
+    @Column(nullable = false)
     private boolean cansaço;
+
+    @Column(nullable = false)
     private boolean sudorese;
+
+    @Column(nullable = false)
     private boolean perdaPeso;
+
+    @Column(nullable = false)
     private boolean edema;
+
+    @Column(nullable = false)
     private String observacao;
 
     public Geral() {}
@@ -21,6 +47,8 @@ public class Geral {
         this.edema = edema;
         this.observacao = observacao;
     }
+
+    public UUID getId() {return id;}
 
     public boolean getFebre() {return febre;}
 

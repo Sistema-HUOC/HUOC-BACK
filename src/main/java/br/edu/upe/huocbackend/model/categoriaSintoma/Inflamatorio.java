@@ -1,11 +1,33 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
+
+import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
+import java.util.UUID;
+
+@Audited
+@Entity
+@Table(name = "cat_inflamatorio")
 public class Inflamatorio {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private boolean dordeGarganta;
+
+    @Column(nullable = false)
     private float linfonodosInchados;
+
+    @Column(nullable = false)
     private boolean erupcaoCutanea;
+
+    @Column(nullable = false)
     private boolean ulceraBocal;
+
+    @Column(nullable = false)
     private String observacao;
 
     public Inflamatorio() {}
@@ -17,6 +39,8 @@ public class Inflamatorio {
         this.ulceraBocal = ulceraBocal;
         this.observacao = observacao;
     }
+
+    public UUID getId() {return id;}
 
     public boolean getDordeGarganta() {return dordeGarganta;}
 

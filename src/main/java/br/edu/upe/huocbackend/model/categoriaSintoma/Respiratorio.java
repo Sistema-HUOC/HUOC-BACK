@@ -1,12 +1,36 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
+
+import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
+import java.util.UUID;
+
+@Audited
+@Entity
+@Table(name = "cat_respiratorio")
 public class Respiratorio {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
     private boolean tosse;
+
+    @Column(nullable = false)
     private boolean faltadeAr;
+
+    @Column(nullable = false)
     private boolean doraoRespirar;
+
+    @Column(nullable = false)
     private boolean espirro;
+
+    @Column(nullable = false)
     private boolean coriza;
+
+    @Column(nullable = false)
     private String observacao;
 
     public Respiratorio() {}
@@ -19,6 +43,8 @@ public class Respiratorio {
         this.coriza = coriza;
         this.observacao = observacao;
     }
+
+    public UUID getId() {return id;}
 
     public boolean getTosse() {return tosse;}
 
