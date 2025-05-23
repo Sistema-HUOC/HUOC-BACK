@@ -20,7 +20,7 @@ public class UserCreateDto {
     public String nome;
 
     @Schema(description = "CPF",example = "111.333.222-22", required = true)
-    @CPF
+    //@CPF
     @NotBlank
     public String cpf;
 
