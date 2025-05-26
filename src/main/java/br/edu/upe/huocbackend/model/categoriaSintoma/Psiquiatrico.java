@@ -1,18 +1,32 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
 
+import br.edu.upe.huocbackend.model.FormularioSintomatologia;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.util.UUID;
 
-@Audited
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
+@Audited
 @Table(name = "cat_psiquatrico")
 public class Psiquiatrico {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Psiquiatrico(boolean ansiedade, float depressao, boolean alucinacao, boolean insonia, String observacao) {
+        this.ansiedade = ansiedade;
+        this.depressao = depressao;
+        this.alucinacao = alucinacao;
+        this.insonia = insonia;
+        this.observacao = observacao;
+    }
+
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false)
@@ -30,55 +44,6 @@ public class Psiquiatrico {
     @Column(nullable = false)
     private String observacao;
 
-    public Psiquiatrico() {}
-
-    public Psiquiatrico(boolean ansiedade, float depressao, boolean alucinacao, boolean insonia, String observacao) {
-        this.ansiedade = ansiedade;
-        this.depressao = depressao;
-        this.alucinacao = alucinacao;
-        this.insonia = insonia;
-        this.observacao = observacao;
-    }
-
-    public UUID getId() {return id;}
-
-    public boolean getAnsiedade() {
-        return ansiedade;
-    }
-
-    public void setAnsiedade(boolean ansiedade) {
-        this.ansiedade = ansiedade;
-    }
-
-    public float getDepressao() {
-        return depressao;
-    }
-
-    public void setDepressao(float depressao) {
-        this.depressao = depressao;
-    }
-
-    public boolean getAlucinacao() {
-        return alucinacao;
-    }
-
-    public void setAlucinacao(boolean alucinacao) {
-        this.alucinacao = alucinacao;
-    }
-
-    public boolean getInsonia() {
-        return insonia;
-    }
-
-    public void setInsonia(boolean insonia) {
-        this.insonia = insonia;
-    }
-
-    public String getObservacao() {
-        return observacao;
-    }
-
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
+    @OneToOne(mappedBy = "catPsiquiatrico", cascade = CascadeType.ALL)
+    private FormularioSintomatologia formSintomatologia;
 }

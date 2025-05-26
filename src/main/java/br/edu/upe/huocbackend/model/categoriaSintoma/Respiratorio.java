@@ -1,18 +1,33 @@
 package br.edu.upe.huocbackend.model.categoriaSintoma;
 
 
+import br.edu.upe.huocbackend.model.FormularioSintomatologia;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.util.UUID;
 
-@Audited
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
+@Audited
 @Table(name = "cat_respiratorio")
 public class Respiratorio {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Respiratorio(boolean tosse, boolean faltadeAr, boolean doraoRespirar, boolean espirro, boolean coriza, String observacao) {
+        this.tosse = tosse;
+        this.faltadeAr = faltadeAr;
+        this.doraoRespirar = doraoRespirar;
+        this.espirro = espirro;
+        this.coriza = coriza;
+        this.observacao = observacao;
+    }
+
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false)
@@ -33,40 +48,6 @@ public class Respiratorio {
     @Column(nullable = false)
     private String observacao;
 
-    public Respiratorio() {}
-
-    public Respiratorio(boolean tosse, boolean faltadeAr, boolean doraoRespirar, boolean espirro, boolean coriza, String observacao) {
-        this.tosse = tosse;
-        this.faltadeAr = faltadeAr;
-        this.doraoRespirar = doraoRespirar;
-        this.espirro = espirro;
-        this.coriza = coriza;
-        this.observacao = observacao;
-    }
-
-    public UUID getId() {return id;}
-
-    public boolean getTosse() {return tosse;}
-
-    public void setTosse(boolean tosse) {this.tosse = tosse;}
-
-    public boolean getFaltadeAr() {return faltadeAr;}
-
-    public void setFaltadeAr(boolean faltadeAr) {this.faltadeAr = faltadeAr;}
-
-    public boolean getDoraoRespirar() {return doraoRespirar;}
-
-    public void setDoraoRespirar(boolean doraoRespirar) {this.doraoRespirar = doraoRespirar;}
-
-    public boolean getEspirro() {return espirro;}
-
-    public void setEspirro(boolean espirro) {this.espirro = espirro;}
-
-    public boolean getCoriza() {return coriza;}
-
-    public void setCoriza(boolean coriza) {this.coriza = coriza;}
-
-    public String getObservacao() {return observacao;}
-
-    public void setObservacao(String observacao) {this.observacao = observacao;}
+    @OneToOne(mappedBy = "catRespiratorio", cascade = CascadeType.ALL)
+    private FormularioSintomatologia formSintomatologia;
 }
