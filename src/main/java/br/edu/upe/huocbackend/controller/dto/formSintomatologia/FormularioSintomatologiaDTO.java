@@ -1,4 +1,5 @@
 package br.edu.upe.huocbackend.controller.dto.formSintomatologia;
+import br.edu.upe.huocbackend.model.Paciente;
 import br.edu.upe.huocbackend.model.categoriaSintoma.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -13,34 +14,36 @@ import java.time.LocalDateTime;
 @Schema(description = "FormularioSintomatologiaDTO")
 public class FormularioSintomatologiaDTO {
     @NotNull
-    private Geral catGeral;
+    public Geral catGeral;
     @NotNull
-    private Respiratorio catRespiratorio;
+    public Respiratorio catRespiratorio;
     @NotNull
-    private Inflamatorio catInflamatorio;
+    public Inflamatorio catInflamatorio;
     @NotNull
-    private Cardiovascular catCardiovascular;
+    public Cardiovascular catCardiovascular;
     @NotNull
-    private Gastrointestinal catGastrointestinal;
+    public Gastrointestinal catGastrointestinal;
     @NotNull
-    private Neurologico catNeurologico;
+    public Neurologico catNeurologico;
     @NotNull
-    private Musculoesqueletico catMusculoesqueletico;
+    public Musculoesqueletico catMusculoesqueletico;
     @NotNull
-    private Hematologico catHematologico;
+    public Hematologico catHematologico;
     @NotNull
-    private Psiquiatrico catPsiquiatrico;
+    public Psiquiatrico catPsiquiatrico;
     @NotNull
-    private LocalDateTime data;
+    public LocalDateTime data;
     @NotNull
-    private Integer numProntuario;
+    public Integer numProntuario;
     @NotBlank
-    private String observacoes;
+    public String observacoes;
+    @NotNull
+    public Paciente paciente;
 
     public FormularioSintomatologiaDTO(Geral catGeral, Respiratorio catRespiratorio, Inflamatorio catInflamatorio,
                                     Cardiovascular catCardiovascular, Gastrointestinal catGastrointestinal, Neurologico catNeurologico,
                                     Musculoesqueletico catMusculoesqueletico, Hematologico catHematologico, Psiquiatrico catPsiquiatrico,
-                                    LocalDateTime data, Integer numProntuario, String observacoes) {
+                                    LocalDateTime data, Integer numProntuario, String observacoes, Paciente paciente) {
         this.catGeral = catGeral;
         this.catRespiratorio = catRespiratorio;
         this.catInflamatorio = catInflamatorio;
@@ -53,5 +56,6 @@ public class FormularioSintomatologiaDTO {
         this.data = data;
         this.numProntuario = numProntuario;
         this.observacoes = observacoes;
+        this.paciente = paciente;
     }
 }

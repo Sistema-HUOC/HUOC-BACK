@@ -21,7 +21,7 @@ public class FormularioSintomatologia {
     public FormularioSintomatologia(Geral catGeral, Respiratorio catRespiratorio, Inflamatorio catInflamatorio,
                                     Cardiovascular catCardiovascular, Gastrointestinal catGastrointestinal, Neurologico catNeurologico,
                                     Musculoesqueletico catMusculoesqueletico, Hematologico catHematologico, Psiquiatrico catPsiquiatrico,
-                                    LocalDateTime data, Integer numProntuario, String observacoes) {
+                                    LocalDateTime data, Integer numProntuario, String observacoes, Paciente paciente) {
         this.catGeral = catGeral;
         this.catRespiratorio = catRespiratorio;
         this.catInflamatorio = catInflamatorio;
@@ -34,6 +34,7 @@ public class FormularioSintomatologia {
         this.data = data;
         this.numProntuario = numProntuario;
         this.observacoes = observacoes;
+        this.paciente = paciente;
     }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
