@@ -33,4 +33,6 @@ public class Pesquisador extends User {
         this.areasAtuacao = areasAtuacao;
     }
 
+    @OneToMany(mappedBy = "pesquisador", cascade = CascadeType.ALL)
+    private List<Prontuario> prontuarios;
 }

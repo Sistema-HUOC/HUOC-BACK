@@ -19,7 +19,7 @@ public class UserCreateDto {
     @NotBlank
     public String nome;
 
-    @Schema(description = "CPF",example = "111.333.222-22", required = true)
+    @Schema(description = "CPF",example = "873.582.520-04", required = true)
     @CPF
     @NotBlank
     public String cpf;
