@@ -1,5 +1,7 @@
 package br.edu.upe.huocbackend.model;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.envers.Audited;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +17,8 @@ import lombok.Setter;
 public class FormularioMedico {
 
     public FormularioMedico() {}
+
+    public FormularioMedico(@NotBlank UUID id, @NotNull LocalDateTime data, @NotBlank String observacoesAdicionaisFormularioMedico) {}
 
     public FormularioMedico(LocalDateTime data, String observacoesAdicionaisFormularioMedico, Medico medico) {
         this.data = data;
@@ -43,4 +47,6 @@ public class FormularioMedico {
 
     @OneToMany(mappedBy = "formularioMedico")
     private List<Prontuario> prontuarios;
+
+
 }
