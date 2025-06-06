@@ -10,15 +10,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Audited
+@Getter
+@Setter
 public class Prontuario {
 	
 	public Prontuario() {
 		// TODO Auto-generated constructor stub
 	}
 	
+
+
+
+
+	public Prontuario(FormularioMedico formularioMedico) {
+		this.formularioMedico = formularioMedico;
+	}
+
+	public Prontuario(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+	public Prontuario(Pesquisador pesquisador)
+	{this.pesquisador= pesquisador;}
+
+
+
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id; 
 	
@@ -29,8 +50,11 @@ public class Prontuario {
 	@JoinColumn(name = "idFormularioMedico") 
     private FormularioMedico formularioMedico;
 
+	@ManyToOne
+	@JoinColumn(name = "idPaciente")
+    private Paciente paciente;
 
-    private String id_Paciente;
-
-    private String id_Pesquisador;
+	@ManyToOne
+	@JoinColumn(name = "idPesquisador")
+    private Pesquisador pesquisador;
 }

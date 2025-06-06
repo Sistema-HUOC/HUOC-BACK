@@ -71,4 +71,7 @@ public class Paciente {
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private List<FormularioSintomatologia> formularioSintomatologia;
+    
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+    private List<Prontuario> prontuarios;
 }

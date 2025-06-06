@@ -31,7 +31,11 @@ public class PacienteCreateDTO {
     @NotNull
     public Boolean htvl2;
     @NotNull
+    
     public Integer numProntuario;
+    
+    
+    
 
     public PacienteCreateDTO(String nome, String cpf, LocalDate dataNasc, String sexo, String telefone, Boolean htvl1, Boolean htvl2, Endereco endereco, Integer numProntuario) {
         this.nome = nome;
