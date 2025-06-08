@@ -84,23 +84,9 @@ public class AdministradorController {
     @ApiResponse(responseCode = "201", description = "Pesquisador  (a) criado com sucesso")
     @ApiResponse(responseCode = "400", description = "Campos obrigatórios ausentes")
     @ApiResponse(responseCode = "409", description = "Usuário com este e-mail ou CPF já existe")
-    @PostMapping("pesquisadores")
+    @PostMapping("pesquisador")
     public  ResponseEntity<String> AdminCreatePesquisador(@Valid @RequestBody PesquisadorCreateDto pesquisadorDto, HttpServletResponse response) {
         try {
-            if (pesquisadorDto.getEmail() == null || pesquisadorDto.getEmail().isEmpty()) {
-                return ResponseEntity.badRequest().body("O e-mail é obrigatório");
-            }
-            if (pesquisadorDto.getPassword() == null || pesquisadorDto.getPassword().isEmpty()) {
-                return ResponseEntity.badRequest().body("A senha é obrigatória");
-            }
-            if (pesquisadorDto.getIdInstituicao() == null) {
-                return ResponseEntity.badRequest().body("A instituição é obrigatória");
-            }
-
-            if (pesquisadorDto.getIdAreasAtuacao() == null || pesquisadorDto.getIdAreasAtuacao().isEmpty()) {
-                return ResponseEntity.badRequest().body("Pelo menos uma área de atuação deve ser informada");
-            }
-
             administradorService.adminCreatePesquisador(pesquisadorDto);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (RuntimeException e) {
