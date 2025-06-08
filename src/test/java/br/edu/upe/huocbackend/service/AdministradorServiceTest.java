@@ -226,7 +226,6 @@ class AdministradorServiceTest {
         when(instituicaoRepository.findById(idInstituicao)).thenReturn(Optional.of(instituicao));
         when(areaAtuacaoRepository.findAllById(List.of(idArea1, idArea2))).thenReturn(List.of(area1));
 
-        // ⚠️ Lembre-se: seu service deve validar isso explicitamente
         assertThrows(EntityNotFoundException.class, () -> administradorService.adminCreatePesquisador(dto));
         verify(pesquisadorRepository, never()).save(any());
     }
