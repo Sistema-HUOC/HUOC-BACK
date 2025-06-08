@@ -34,4 +34,4 @@ build/
 
 
 ### development ###
-src/main/resources/*.properties
+#src/main/resources/*.properties

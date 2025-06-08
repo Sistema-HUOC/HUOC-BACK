@@ -5,9 +5,13 @@ import br.edu.upe.huocbackend.exception.PacienteException;
 import br.edu.upe.huocbackend.model.Endereco;
 import br.edu.upe.huocbackend.model.Paciente;
 import br.edu.upe.huocbackend.repository.IPacienteRepository;
+import br.edu.upe.huocbackend.repository.ProntuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 
@@ -16,13 +20,18 @@ import static org.mockito.Mockito.*;
 
 public class EnfermagemServiceTest {
 
+    @Mock
     private IPacienteRepository pacienteRepository;
+
+    @Mock
+    private ProntuarioRepository prontuarioRepository;
+
+    @InjectMocks
     private EnfermagemService enfermagemService;
 
     @BeforeEach
-    public void setUp() {
-        pacienteRepository = Mockito.mock(IPacienteRepository.class);
-        enfermagemService = new EnfermagemService(pacienteRepository);
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test

@@ -4,7 +4,7 @@ RUN apk add --no-cache maven
 
 FROM base AS build
 COPY . .
-RUN mvn install -DskipTests
+RUN mvn install
 
 EXPOSE 8080
 
