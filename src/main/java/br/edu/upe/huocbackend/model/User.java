@@ -50,6 +50,9 @@ public class User  implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
     @Column(name = "acess_level")
     @Enumerated(EnumType.STRING)
     private AcessLevel acessLevel;
