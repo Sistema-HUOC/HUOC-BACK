@@ -32,15 +32,29 @@ public class MedicoController {
     public ResponseEntity<Page<PacienteResponse>> getPaciente(@RequestParam(value = "page",required = false,defaultValue = "0") int page) {
         return ResponseEntity.ok(medicoService.listarPacientes(page));
     }
-    @GetMapping("/paciente/{nome}")
+    @GetMapping("/paciente/nome/{nome}")
     @Operation(
             summary = "Pega paciente pelo nome",
             description = "Pega o paciente referente ao nome fornecido"
     )
     @ApiResponse(responseCode = "200", description = "Consumido com sucesso")
     @ApiResponse(responseCode = "404", description = "Paciente não encontrado")
-    public ResponseEntity<PacienteResponse> getPaciente(@PathVariable("nome") String nome) {
+    public ResponseEntity<PacienteResponse> getPacientePorNome(@PathVariable("nome") String nome) {
         var p = medicoService.getPacientePorNome(nome);
+        if(p.isPresent())
+            return ResponseEntity.ok(p.get());
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+    @GetMapping("/paciente/cpf/{cpf}")
+    @Operation(
+            summary = "Pega paciente pelo cpf",
+            description = "Pega o paciente referente ao cpf fornecido"
+    )
+    @ApiResponse(responseCode = "200", description = "Consumido com sucesso")
+    @ApiResponse(responseCode = "404", description = "Paciente não encontrado")
+    public ResponseEntity<PacienteResponse> getPacientePorCpf(@PathVariable("cpf") String cpf) {
+        var p = medicoService.getPacientePorCpf(cpf);
         if(p.isPresent())
             return ResponseEntity.ok(p.get());
         else

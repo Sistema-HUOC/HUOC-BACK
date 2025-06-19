@@ -14,4 +14,5 @@ public interface IPacienteRepository extends JpaRepository<Paciente, UUID>, Revi
     boolean existsByCpf(String cpf);
 
     Optional<Paciente> findByNome(String nome);
+    Optional<Paciente> findByCpf(String cpf);
 }

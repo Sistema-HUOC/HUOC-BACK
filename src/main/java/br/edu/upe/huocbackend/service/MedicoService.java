@@ -44,4 +44,8 @@ public class MedicoService {
     public Optional<PacienteResponse> getPacientePorNome(String nome){
         return pacienteRepository.findByNome(nome).map(PacienteMapper::toResponse);
     }
+    @org.springframework.transaction.annotation.Transactional
+    public Optional<PacienteResponse> getPacientePorCpf(String cpf){
+        return pacienteRepository.findByNome(cpf).map(PacienteMapper::toResponse);
+    }
 }
