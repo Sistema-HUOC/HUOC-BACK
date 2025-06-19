@@ -12,4 +12,6 @@ import java.util.UUID;
 public interface IPacienteRepository extends JpaRepository<Paciente, UUID>, RevisionRepository<Paciente, UUID, Integer> {
     Optional<Paciente> findById(UUID id);
     boolean existsByCpf(String cpf);
+
+    Optional<Paciente> findByNome(String nome);
 }

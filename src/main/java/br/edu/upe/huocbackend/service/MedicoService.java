@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MedicoService {
 
@@ -37,5 +39,9 @@ public class MedicoService {
     @org.springframework.transaction.annotation.Transactional
     public Page<PacienteResponse> listarPacientes(int page){
         return pacienteRepository.findAll(PageRequest.of(page,15)).map(PacienteMapper::toResponse);
+    }
+    @org.springframework.transaction.annotation.Transactional
+    public Optional<PacienteResponse> getPacientePorNome(String nome){
+        return pacienteRepository.findByNome(nome).map(PacienteMapper::toResponse);
     }
 }
