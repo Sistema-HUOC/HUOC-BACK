@@ -54,7 +54,7 @@ public class AdministradorService {
             throw new AdministradorException("Administrador já cadastrado");
         }
         administradorRepository.save(new Administrador(administrador.nome,administrador.cpf,
-                administrador.email,administrador.password, AcessLevel.ADMINISTRADOR));
+                administrador.email, passwordEncoder.encode(administrador.password), AcessLevel.ADMINISTRADOR));
     }
 
     @Transactional
@@ -64,7 +64,7 @@ public class AdministradorService {
             throw new EnfermagemException("Enfermeiro(a) já cadastrado(a)");
         }
         enfermagemRepository.save(new Enfermagem(enfermagem.nome,enfermagem.cpf,
-                enfermagem.email,enfermagem.password, AcessLevel.ENFERMAGEM, enfermagem.coren));
+                enfermagem.email, passwordEncoder.encode(enfermagem.password), AcessLevel.ENFERMAGEM, enfermagem.coren));
     }
 
     @Transactional

@@ -3,7 +3,9 @@ package br.edu.upe.huocbackend.controller;
 import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDto;
 import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
 import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
+import br.edu.upe.huocbackend.controller.dto.user.UserActivationDTO;
 import br.edu.upe.huocbackend.service.AdministradorService;
+import br.edu.upe.huocbackend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,10 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/adm")
@@ -22,9 +21,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdministradorController {
 
     private final AdministradorService administradorService;
+    private final UserService  userService;
 
-    public AdministradorController(AdministradorService administradorService) {
+    public AdministradorController(AdministradorService administradorService, UserService userService) {
         this.administradorService = administradorService;
+        this.userService = userService;
+    }
+
+    @Operation(
+            summary = "Ativar ou Desativar Usuários",
+            description = "Ativar ou Desativar Usuários pelo administrador"
+    )
+    @ApiResponse(responseCode = "200", description = "Usuários Ativar ou Desativar com sucesso")
+    @ApiResponse(responseCode = "400", description = "Conflito no e-mail")
+    @PutMapping
+    public ResponseEntity<String> updateUserActive(@Valid @RequestBody UserActivationDTO dto){
+        userService.updateUserActive(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK.toString());
     }
 
     @Operation(
@@ -93,6 +106,4 @@ public class AdministradorController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
-
-
 }

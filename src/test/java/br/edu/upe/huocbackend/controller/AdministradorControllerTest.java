@@ -8,6 +8,7 @@ import br.edu.upe.huocbackend.exception.EnfermagemException;
 import br.edu.upe.huocbackend.exception.PesquisadorException;
 import br.edu.upe.huocbackend.repository.IUserRepository;
 import br.edu.upe.huocbackend.service.AdministradorService;
+import br.edu.upe.huocbackend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,9 @@ public class AdministradorControllerTest {
 
     @MockitoBean
     private AdministradorService administradorService;
+
+    @MockitoBean
+    private UserService userService;
 
     @MockitoBean
     private TokenService tokenServive;

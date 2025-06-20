@@ -1,6 +1,7 @@
 package br.edu.upe.huocbackend.controller.handler;
 
 import br.edu.upe.huocbackend.exception.EntidadeUnicidadeVioladaException;
+import br.edu.upe.huocbackend.exception.UserEmailInvalid;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,12 @@ public class DefaultExceptionHandler {
                 request.getRequestURI()
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(UserEmailInvalid.class)
+    public ResponseEntity<String> handleUserEmailInvalid(UserEmailInvalid ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("E-mail inválido: " + ex.getMessage());
     }
 }

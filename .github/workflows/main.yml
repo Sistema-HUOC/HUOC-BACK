@@ -1,14 +1,16 @@
 name: On merge check failed tests
+
 on:
   workflow_dispatch:
   pull_request:
     branches:
       - main
-      - developer
+      - develop
+
 jobs:
-  check_tests:
+  server_test:  
     runs-on: ubuntu-latest
-    name: server_test
+    name: server_test 
     steps:
       - name: My first step - check out repository
         uses: actions/checkout@v4
@@ -16,7 +18,7 @@ jobs:
         with:
           distribution: 'temurin' 
           java-version: '17'
-      - name: bliud_verified
+      - name: build_verified  
         run: mvn validate
       - name: test
         run: mvn test
