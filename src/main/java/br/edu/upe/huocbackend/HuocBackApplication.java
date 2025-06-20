@@ -18,7 +18,7 @@ public class HuocBackApplication {
 	}
 
 	@Bean
-	@Profile({"prod,dev"})
+	@Profile({"prod"})
 	public CommandLineRunner devProfile(IUserRepository userRepository, PasswordEncoder encoder) {
 		return args -> {
 			if (userRepository.findByEmail("admin@email.com").isEmpty()) {
@@ -26,6 +26,13 @@ public class HuocBackApplication {
 						"Jurema",
 						"333.666.777-13",
 						"admin@email.com",
+						encoder.encode("123"),
+						AcessLevel.ADMINISTRADOR
+				));
+				userRepository.save(new User(
+						"jair",
+						"333.666.777-12",
+						"jair@email.com",
 						encoder.encode("123"),
 						AcessLevel.ADMINISTRADOR
 				));
