@@ -13,7 +13,6 @@ import lombok.Setter;
 public class EnfermagemCreateDTO extends UserCreateDto {
 
     @NotBlank(message = "O número do COREN é obrigatório.")
-    @NotBlank
     @Pattern(regexp = "\\d{4,6}-[A-Z]{2}", message = "O COREN deve seguir o formato '123456-PE'.")
     public String coren;
 
