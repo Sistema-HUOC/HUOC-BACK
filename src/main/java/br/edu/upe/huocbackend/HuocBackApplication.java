@@ -1,7 +1,11 @@
 package br.edu.upe.huocbackend;
 
 import br.edu.upe.huocbackend.model.AcessLevel;
+import br.edu.upe.huocbackend.model.Administrador;
+import br.edu.upe.huocbackend.model.Enfermagem;
 import br.edu.upe.huocbackend.model.User;
+import br.edu.upe.huocbackend.repository.IAdministradorRepository;
+import br.edu.upe.huocbackend.repository.IEnfermagemRepository;
 import br.edu.upe.huocbackend.repository.IUserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,25 +23,39 @@ public class HuocBackApplication {
 
 	@Bean
 	@Profile({"prod"})
-	public CommandLineRunner devProfile(IUserRepository userRepository, PasswordEncoder encoder) {
+	public CommandLineRunner devProfile(IUserRepository userRepository, IAdministradorRepository administradorRepository,
+										IEnfermagemRepository enfermagemRepository, PasswordEncoder encoder) {
 		return args -> {
 			if (userRepository.findByEmail("admin@email.com").isEmpty()) {
-				userRepository.save(new User(
+				administradorRepository.save(new Administrador(
 						"Jurema",
 						"333.666.777-13",
 						"admin@email.com",
 						encoder.encode("123"),
 						AcessLevel.ADMINISTRADOR
 				));
-				userRepository.save(new User(
+				administradorRepository.save(new Administrador(
 						"jair",
 						"333.666.777-12",
 						"jair@email.com",
 						encoder.encode("123"),
 						AcessLevel.ADMINISTRADOR
 				));
+				enfermagemRepository.save(new Enfermagem(
+						"victor",
+						"333.666.777-14",
+						"enfvictor@email.com",
+						encoder.encode("123"),
+						AcessLevel.ENFERMAGEM,"123456-PE"
+				));
+				enfermagemRepository.save(new Enfermagem(
+						"bianca",
+						"333.666.277-14",
+						"enfbianca@email.com",
+						encoder.encode("123"),
+						AcessLevel.ENFERMAGEM,"123256-PE"
+				));
 			}
 		};
 	}
-
 }

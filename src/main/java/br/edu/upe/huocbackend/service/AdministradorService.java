@@ -1,7 +1,9 @@
 package br.edu.upe.huocbackend.service;
 
 import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDto;
+import br.edu.upe.huocbackend.controller.dto.administrador.ResponseAdminastradorDto;
 import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
+import br.edu.upe.huocbackend.controller.dto.enfermagem.ResponseEnfermeiroDto;
 import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
 import br.edu.upe.huocbackend.exception.EnfermagemException;
 import br.edu.upe.huocbackend.exception.AdministradorException;
@@ -19,6 +21,8 @@ import br.edu.upe.huocbackend.repository.IInstituicaoRepository;
 import br.edu.upe.huocbackend.repository.IPesquisadorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -87,5 +91,17 @@ public class AdministradorService {
                 pesquisador.email, passwordEncoder.encode(pesquisador.password) , AcessLevel.PESQUISADOR, instituicao, areasAtua));
     }
 
+    public Page<ResponseAdminastradorDto> listAllAdministrador(String nome, String email, boolean ativo, Pageable pageable) {
+        return administradorRepository
+                .listComParametros(nome, email, ativo, pageable)
+                .map(ResponseAdminastradorDto::new);
     }
+
+
+    public Page<ResponseEnfermeiroDto> listAllEnfermeiros(String nome, String email, String coren, boolean ativo,Pageable pageable) {
+        return enfermagemRepository
+                .listComParametros(nome,email,coren,ativo,pageable)
+                .map(ResponseEnfermeiroDto::new);
+    }
+}
 
