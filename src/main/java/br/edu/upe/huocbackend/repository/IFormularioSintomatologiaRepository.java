@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,4 +15,5 @@ import java.util.UUID;
 public interface IFormularioSintomatologiaRepository extends JpaRepository<FormularioSintomatologia, UUID>, RevisionRepository<FormularioSintomatologia, UUID, Integer> {
     Optional<FormularioSintomatologia> findById(UUID id);
     boolean existsByPaciente(Paciente paciente);
+    List<FormularioSintomatologia> findAllByPacienteId(UUID pacienteId);
 }
