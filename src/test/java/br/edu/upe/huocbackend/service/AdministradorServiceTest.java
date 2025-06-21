@@ -42,10 +42,16 @@ class AdministradorServiceTest {
 
     private Administrador administrador1;
 
-    @Mock private IPesquisadorRepository pesquisadorRepository;
-    @Mock private IInstituicaoRepository instituicaoRepository;
-    @Mock private IAreaAtuacaoRepository areaAtuacaoRepository;
-    @Mock private PasswordEncoder passwordEncoder;
+    @Mock
+    private IPesquisadorRepository pesquisadorRepository;
+    @Mock
+    private IInstituicaoRepository instituicaoRepository;
+    @Mock
+    private IAreaAtuacaoRepository areaAtuacaoRepository;
+    @Mock
+    private IMedicoRepository medicoRepository;
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
 
 

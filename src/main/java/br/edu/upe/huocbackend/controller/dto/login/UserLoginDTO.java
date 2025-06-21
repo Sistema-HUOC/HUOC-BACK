@@ -6,11 +6,11 @@ import jakarta.validation.constraints.NotBlank;
 
 @Schema(description = "User login request")
 public class UserLoginDTO {
-    @Schema(description = "User email address", example = "user@example.com", required = true)
+    @Schema(description = "User email address", example = "admin@email.com", required = true)
     @Email
     @NotBlank
     public String email;
-    @Schema(description = "User password", example = "password123", required = true)
+    @Schema(description = "User password", example = "123", required = true)
     @NotBlank
     public String password;
 }

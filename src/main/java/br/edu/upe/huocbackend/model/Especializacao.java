@@ -21,7 +21,7 @@ public class Especializacao {
 
     private String tipoEspecializacao;
 
-    @OneToMany(mappedBy = "especializacao")
+    @ManyToMany(mappedBy = "especializacoes")
     private List<Medico> medicos;
 
     public Especializacao(String tipoEspecializacao) {
