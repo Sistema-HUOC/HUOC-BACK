@@ -1,7 +1,12 @@
 package br.edu.upe.huocbackend.controller;
 
 import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDto;
+import br.edu.upe.huocbackend.controller.dto.administrador.ResponseAdminastradorDTO;
 import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
+import br.edu.upe.huocbackend.controller.dto.enfermagem.ResponseEnfermeiroDTO;
+import br.edu.upe.huocbackend.controller.dto.medico.CreateEspecializacaoDTO;
+import br.edu.upe.huocbackend.controller.dto.medico.MedicoCriacaoDTO;
+import br.edu.upe.huocbackend.controller.dto.medico.ResponseMedicosDTO;
 import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
 import br.edu.upe.huocbackend.controller.dto.user.UserActivationDTO;
 import br.edu.upe.huocbackend.service.AdministradorService;
@@ -11,9 +16,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/adm")
@@ -49,17 +59,33 @@ public class AdministradorController {
     @ApiResponse(responseCode = "409", description = "Usuário com este e-mail ou CPF já existe")
     @PostMapping()
     public ResponseEntity<String> CreateAdmin(@Valid @RequestBody AdministradorCreateDto dto, HttpServletResponse response) {
-        if(dto.getEmail() == null || dto.getEmail().isEmpty() ||
-                dto.getPassword() == null || dto.getPassword().isEmpty()) {
-            return ResponseEntity.badRequest().body("E-mail e senha são obrigatórios");
-        }
-        try {
             administradorService.save(dto);
             return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
+    }
+    @Operation(
+            summary = "Registro de medico",
+            description = "Cria um novo medico com os detalhes fornecidos"
+    )
+    @ApiResponse(responseCode = "201", description = "Medico criado com sucesso")
+    @ApiResponse(responseCode = "400", description = "Campos obrigatórios ausentes")
+    @ApiResponse(responseCode = "409", description = "Usuário com este e-mail ou CPF já existe")
+    @PostMapping("/medico")
+    public ResponseEntity<String> CreateMedico(@Valid @RequestBody MedicoCriacaoDTO dto, HttpServletResponse response) {
+        administradorService.adminCreateMedico(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
+    @Operation(
+            summary = "Registro de Especialização",
+            description = "Cria um novo Especialização com os detalhes fornecidos"
+    )
+    @ApiResponse(responseCode = "201", description = "Especialização criado com sucesso")
+    @ApiResponse(responseCode = "400", description = "Campos obrigatórios ausentes")
+    @ApiResponse(responseCode = "409", description = "Especialização já existe")
+    @PostMapping("/especializacao")
+    public ResponseEntity<String> CreateEspecializacao(@Valid @RequestBody CreateEspecializacaoDTO dto, HttpServletResponse response) {
+        administradorService.adminCreateEspecializacao(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Operation(
@@ -71,23 +97,8 @@ public class AdministradorController {
     @ApiResponse(responseCode = "409", description = "Usuário com este e-mail ou CPF já existe")
     @PostMapping("/enfermeiro")
     public  ResponseEntity<String> AdminCreateEnfermeiro(@Valid @RequestBody EnfermagemCreateDTO enfermeiroDto, HttpServletResponse response) {
-        if (enfermeiroDto.getEmail() == null || enfermeiroDto.getEmail().isEmpty()) {
-            return ResponseEntity.badRequest().body("O e-mail é obrigatório");
-        }
-
-        if (enfermeiroDto.getPassword() == null || enfermeiroDto.getPassword().isEmpty()) {
-            return ResponseEntity.badRequest().body("A senha é obrigatória");
-        }
-
-        if (enfermeiroDto.getCoren() == null || enfermeiroDto.getCoren().isEmpty()) {
-            return ResponseEntity.badRequest().body("O número do COREN é obrigatório");
-        }
-        try {
         administradorService.adminCreateEnfermagem(enfermeiroDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (RuntimeException e) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
     }
 
     @Operation(
@@ -99,11 +110,50 @@ public class AdministradorController {
     @ApiResponse(responseCode = "409", description = "Usuário com este e-mail ou CPF já existe")
     @PostMapping("pesquisador")
     public  ResponseEntity<String> AdminCreatePesquisador(@Valid @RequestBody PesquisadorCreateDto pesquisadorDto, HttpServletResponse response) {
-        try {
-            administradorService.adminCreatePesquisador(pesquisadorDto);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
+        administradorService.adminCreatePesquisador(pesquisadorDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+
+    @GetMapping("/administradores")
+    @ApiResponse(responseCode = "200", description = "Retorna a lista de Adminastradores")
+    public ResponseEntity<Page<ResponseAdminastradorDTO>> listAdms(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false , defaultValue = "true") boolean ativo,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        return ResponseEntity.ok(administradorService.listAllAdministrador(nome, email, ativo,pageable));
+    }
+
+    @GetMapping("/enfermeiros")
+    @ApiResponse(responseCode = "200", description = "Retorna a lista de Enfermeiros")
+    public ResponseEntity<Page<ResponseEnfermeiroDTO>> listEnfermeiros(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String coren,
+            @RequestParam(required = false , defaultValue = "true") boolean ativo,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        return ResponseEntity.ok(administradorService.listAllEnfermeiros(nome,email,coren,ativo,pageable));
+    }
+
+    @GetMapping("/Medicos")
+    @ApiResponse(responseCode = "200", description = "Retorna a lista de Medicos")
+    public ResponseEntity<Page<ResponseMedicosDTO>> listMedicos(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String crm,
+            @RequestParam(required = false) String especializacao,
+            @RequestParam(required = false , defaultValue = "true") boolean ativo,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        return ResponseEntity.ok(administradorService.listAllMedicos(nome,email,crm,especializacao,ativo,pageable));
+    }
+
+    @GetMapping("/especializacoes")
+    @ApiResponse(responseCode = "200", description = "Retorna a lista de Especializacoes")
+    public ResponseEntity<List<String>> listEspecializacoes(){
+        return ResponseEntity.ok(administradorService.listEspecializacoes());
     }
 }

@@ -33,6 +33,7 @@ public class User  implements UserDetails {
         this.email = email;
         this.password = password;
         this.acessLevel = level;
+        this.active = true;
     }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,7 +52,7 @@ public class User  implements UserDetails {
     private String password;
 
     @Column(nullable = false)
-    private boolean active = true;
+    private boolean active;
 
     @Column(name = "acess_level")
     @Enumerated(EnumType.STRING)
