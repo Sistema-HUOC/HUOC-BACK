@@ -56,4 +56,16 @@ public class DefaultExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(ex.getMessage());
     }
+    @ExceptionHandler(EspecializacaoException.class)
+    public ResponseEntity<String> handleUserEmailInvalid(EspecializacaoException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ex.getMessage());
+    }
+    @ExceptionHandler(MedicoException.class)
+    public ResponseEntity<String> handleUserEmailInvalid(MedicoException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ex.getMessage());
+    }
 }
