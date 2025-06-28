@@ -1,12 +1,12 @@
-version: "3.9"  # atualizado para suportar 'depends_on.condition'
+version: "3.9"
 services:
   db:
     image: mysql:8.2
     environment:
-      MYSQL_USER: user
-      MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: huoc
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
     ports:
       - "3306:3306"
     networks:
@@ -14,9 +14,9 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 20s  # tempo para o MySQL inicializar
+      timeout: 10s
+      retries: 10
+      start_period: 60s
 
   app:
     build: .
@@ -32,3 +32,4 @@ services:
 networks:
   redehuoc:
     driver: bridge
+
