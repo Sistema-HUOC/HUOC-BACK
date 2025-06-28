@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"  # atualizado para suportar 'depends_on.condition'
 services:
   db:
     image: mysql:8.2
@@ -9,6 +9,14 @@ services:
       MYSQL_DATABASE: huoc
     ports:
       - "3306:3306"
+    networks:
+      - redehuoc
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s  # tempo para o MySQL inicializar
 
   app:
     build: .
@@ -16,4 +24,11 @@ services:
       - "8080:8080"
     restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - redehuoc
+
+networks:
+  redehuoc:
+    driver: bridge
