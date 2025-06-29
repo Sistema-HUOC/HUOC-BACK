@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface IEspecializacaoRepository extends JpaRepository<Especializacao, UUID> , RevisionRepository<Especializacao,UUID,Integer> {
+    boolean existsByTipoEspecializacao(String tipoEspecializacao);
 }

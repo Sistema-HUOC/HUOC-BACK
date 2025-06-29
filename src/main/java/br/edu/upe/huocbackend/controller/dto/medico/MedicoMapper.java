@@ -7,7 +7,7 @@ public class MedicoMapper {
     public static Medico fromDto(MedicoCriacaoDTO medicoCriacaoDTO){
         Medico medico = new Medico();
         medico.setNome(medicoCriacaoDTO.nome);
-        medico.setCRM(medicoCriacaoDTO.crm);
+        medico.setCrm(medicoCriacaoDTO.crm);
         medico.setEmail(medicoCriacaoDTO.email);
         medico.setCpf(medicoCriacaoDTO.cpf);
         medico.setPassword(medicoCriacaoDTO.password);

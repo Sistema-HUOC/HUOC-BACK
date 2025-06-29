@@ -1,0 +1,12 @@
+package br.edu.upe.huocbackend.controller.dto.medico;
+
+import br.edu.upe.huocbackend.model.Medico;
+
+import java.util.Set;
+
+public record ResponseMedicosDTO(String nome, String email, String CRM, Set<String> especializacao) {
+
+    public ResponseMedicosDTO(Medico medico){
+        this(medico.getNome(),medico.getEmail(),medico.getCrm(),medico.getSetEspecializacaos());
+    }
+}

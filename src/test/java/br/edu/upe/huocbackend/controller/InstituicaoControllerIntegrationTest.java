@@ -2,7 +2,7 @@ package br.edu.upe.huocbackend.controller;
 
 import br.edu.upe.huocbackend.config.security.SecurityConfig;
 import br.edu.upe.huocbackend.config.security.TokenService;
-import br.edu.upe.huocbackend.controller.dto.instituicao.InstituicaoDto;
+import br.edu.upe.huocbackend.controller.dto.instituicao.CreateInstituicaoDto;
 import br.edu.upe.huocbackend.service.InstituicaoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -40,20 +40,20 @@ public class InstituicaoControllerIntegrationTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     public void deveCriarInstituicaoComSucesso() throws Exception {
-        InstituicaoDto dto = new InstituicaoDto("Instituto Federal");
+        CreateInstituicaoDto dto = new CreateInstituicaoDto("UFPE","recife","10.767.239/0001-40");
 
         mockMvc.perform(post("/api/instituicoes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isCreated());
 
-        verify(instituicaoService, times(1)).createInstituicao(any(InstituicaoDto.class));
+        verify(instituicaoService, times(1)).createInstituicao(any(CreateInstituicaoDto.class));
     }
 
     @Test
     @WithMockUser(roles = {"ADMIN"})
     public void deveRetornarErroQuandoNomeForInvalido() throws Exception {
-        InstituicaoDto dto = new InstituicaoDto("");
+        CreateInstituicaoDto dto = new CreateInstituicaoDto("","recife","10.767.239/0001-40");
 
         mockMvc.perform(post("/api/instituicoes")
                         .contentType(MediaType.APPLICATION_JSON)

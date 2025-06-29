@@ -1,6 +1,7 @@
 package br.edu.upe.huocbackend.controller;
 
 import br.edu.upe.huocbackend.controller.dto.formSintomatologia.FormularioSintomatologiaDTO;
+import br.edu.upe.huocbackend.controller.dto.formSintomatologia.ListarTodosFormularioSintomatologiaDTO;
 import br.edu.upe.huocbackend.service.FormularioSintomatologiaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,10 +10,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/formSintomatologia")
@@ -55,4 +56,16 @@ public class FormularioSintomatologiaController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
+
+    @Operation(
+            summary = "Listar todos os formulários de sintomatologia de um paciente",
+            description = "Retorna todos os formulários preenchidos para um paciente específico"
+    )
+    @ApiResponse(responseCode = "200", description = "Lista de formulários retornada com sucesso")
+    @GetMapping("/listar/{idPaciente}")
+    public ResponseEntity<List<ListarTodosFormularioSintomatologiaDTO>> listarPorPaciente(@PathVariable UUID idPaciente) {
+        List<ListarTodosFormularioSintomatologiaDTO> lista = formSintomatologiaService.listarFormulariosPorPaciente(idPaciente);
+        return ResponseEntity.ok(lista);
+    }
+
 }

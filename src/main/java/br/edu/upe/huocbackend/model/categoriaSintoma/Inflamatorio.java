@@ -2,6 +2,7 @@ package br.edu.upe.huocbackend.model.categoriaSintoma;
 
 
 import br.edu.upe.huocbackend.model.FormularioSintomatologia;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,5 +46,6 @@ public class Inflamatorio {
     private String observacao;
 
     @OneToOne(mappedBy = "catInflamatorio", cascade = CascadeType.ALL)
+    @JsonIgnore
     private FormularioSintomatologia formSintomatologia;
 }
