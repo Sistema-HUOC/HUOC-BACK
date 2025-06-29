@@ -9,7 +9,6 @@ import br.edu.upe.huocbackend.controller.dto.medico.MedicoCriacaoDTO;
 import br.edu.upe.huocbackend.controller.dto.medico.ResponseMedicosDTO;
 import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
 import br.edu.upe.huocbackend.controller.dto.user.UserActivationDTO;
-
 import br.edu.upe.huocbackend.service.AdministradorService;
 import br.edu.upe.huocbackend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;

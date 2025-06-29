@@ -1,6 +1,6 @@
 package br.edu.upe.huocbackend.service;
 
-import br.edu.upe.huocbackend.controller.dto.instituicao.InstituicaoDto;
+import br.edu.upe.huocbackend.controller.dto.instituicao.CreateInstituicaoDto;
 import br.edu.upe.huocbackend.model.Instituicao;
 import br.edu.upe.huocbackend.repository.IInstituicaoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ public class InstituicaoServiceTest {
     @DisplayName("Deve salvar uma nova instituição com o nome correto")
     void deveSalvarInstituicao() {
         // Arrange
-        InstituicaoDto dto = new InstituicaoDto("UFPE");
+        CreateInstituicaoDto dto = new CreateInstituicaoDto("UFPE","recife","12.345.678/0001-90");
 
         // Act
         instituicaoService.createInstituicao(dto);
@@ -43,7 +43,7 @@ public class InstituicaoServiceTest {
     @Test
     @DisplayName("Deve lançar exceção se o repositório falhar")
     void deveLancarExcecaoAoSalvarInstituicao() {
-        InstituicaoDto dto = new InstituicaoDto("UFPE");
+        CreateInstituicaoDto dto = new CreateInstituicaoDto("UFPE","recife","12.345.678/0001-90");
 
         doThrow(new RuntimeException("Erro no banco"))
                 .when(instituicaoRepository)

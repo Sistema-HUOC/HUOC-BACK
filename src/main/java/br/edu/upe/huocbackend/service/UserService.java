@@ -28,6 +28,7 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException("Usuário ou senha inválidos"));
         UserDtoReponse userDto = new UserDtoReponse();
         userDto.userId=user.getId();
+        userDto.name = user.getNome();
         userDto.username = user.getUsername();
         userDto.accessLevel = user.getAcessLevel();
         return userDto;
