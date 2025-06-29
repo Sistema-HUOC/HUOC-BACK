@@ -12,8 +12,11 @@ public class UserDtoReponse {
     public UUID userId;
 
     @Schema(description = "User's display name", example = "John Doe")
+    public String name;
+
+    @Schema(description = "User's email address", example = "john@email.com")
     public String username;
 
-    @Schema(description = "")
+    @Schema(description = "User's access level")
     public AcessLevel accessLevel;
 }

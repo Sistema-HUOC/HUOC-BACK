@@ -1,14 +1,22 @@
-version: "3"
+version: "3.9"
 services:
   db:
     image: mysql:8.2
     environment:
-      MYSQL_USER: user
-      MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: huoc
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
     ports:
       - "3306:3306"
+    networks:
+      - redehuoc
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
 
   app:
     build: .
@@ -16,4 +24,12 @@ services:
       - "8080:8080"
     restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - redehuoc
+
+networks:
+  redehuoc:
+    driver: bridge
+

@@ -68,4 +68,11 @@ public class DefaultExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(ex.getMessage());
     }
+
+    @ExceptionHandler(InstituicaoException.class)
+    public ResponseEntity<String> handleUserEmailInvalid(InstituicaoException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
 }
