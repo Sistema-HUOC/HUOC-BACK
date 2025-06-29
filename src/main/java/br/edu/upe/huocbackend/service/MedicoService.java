@@ -36,16 +36,16 @@ public class MedicoService {
         formularioMedicoRepository.save(new FormularioMedico(formularioMedico.id, formularioMedico.data, formularioMedico.observacoesAdicionaisFormularioMedico));
     }
 
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public Page<PacienteResponse> listarPacientes(int page){
         return pacienteRepository.findAll(PageRequest.of(page,15)).map(PacienteMapper::toResponse);
     }
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public Optional<PacienteResponse> getPacientePorNome(String nome){
         return pacienteRepository.findByNome(nome).map(PacienteMapper::toResponse);
     }
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public Optional<PacienteResponse> getPacientePorCpf(String cpf){
-        return pacienteRepository.findByNome(cpf).map(PacienteMapper::toResponse);
+        return pacienteRepository.findByCpf(cpf).map(PacienteMapper::toResponse);
     }
 }
