@@ -4,7 +4,7 @@ import br.edu.upe.huocbackend.model.Instituicao;
 
 import java.util.UUID;
 
-public record ResponseInstituicaoDto(UUID uuid,
+public record ResponseInstituicaoDto(UUID  huodIdentify,
                                      String nomeInstituicao,
                                      String nomeDoCampos,
                                      String cnpj) {

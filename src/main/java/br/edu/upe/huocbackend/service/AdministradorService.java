@@ -2,24 +2,28 @@ package br.edu.upe.huocbackend.service;
 
 import br.edu.upe.huocbackend.controller.dto.administrador.AdministradorCreateDto;
 import br.edu.upe.huocbackend.controller.dto.administrador.ResponseAdminastradorDTO;
+import br.edu.upe.huocbackend.controller.dto.administrador.UpdateAdministradorDto;
 import br.edu.upe.huocbackend.controller.dto.enfermagem.EnfermagemCreateDTO;
 import br.edu.upe.huocbackend.controller.dto.enfermagem.ResponseEnfermeiroDTO;
+import br.edu.upe.huocbackend.controller.dto.enfermagem.UpdateEnfermeiroDTO;
 import br.edu.upe.huocbackend.controller.dto.medico.CreateEspecializacaoDTO;
 import br.edu.upe.huocbackend.controller.dto.medico.MedicoCriacaoDTO;
 import br.edu.upe.huocbackend.controller.dto.medico.ResponseMedicosDTO;
+import br.edu.upe.huocbackend.controller.dto.medico.UpdateMedicoDto;
 import br.edu.upe.huocbackend.controller.dto.pesquisador.PesquisadorCreateDto;
+import br.edu.upe.huocbackend.controller.dto.pesquisador.UpdatePesquisadorDto;
 import br.edu.upe.huocbackend.exception.*;
 import br.edu.upe.huocbackend.model.*;
 import br.edu.upe.huocbackend.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,8 +59,7 @@ public class AdministradorService {
 
     @Transactional
     public void save(AdministradorCreateDto administrador) {
-        Boolean admin = administradorRepository.existsByEmail(administrador.email);
-        if(admin) {
+        if(administradorRepository.existsByEmail(administrador.email)) {
             throw new AdministradorException("Administrador já cadastrado");
         }
         administradorRepository.save(new Administrador(administrador.nome,administrador.cpf,
@@ -65,10 +68,10 @@ public class AdministradorService {
 
     @Transactional
     public void adminCreateMedico(MedicoCriacaoDTO dto){
-        Boolean medico = medicoRepository.existsByEmail(dto.email);
-        if(medico) {
-            throw new MedicoException("Medico(a) já cadastrado(a)");
+        if (medicoRepository.existsByEmail(dto.email)) {
+            throw new MedicoException("Médico(a) com o e-mail '" + dto.email + "' já está cadastrado(a).");
         }
+
         List<Especializacao> especializacaoList = especializacaoRepository.findAll();
 
         Set<Especializacao> filtradas = especializacaoList.stream()
@@ -82,18 +85,15 @@ public class AdministradorService {
 
     @Transactional
     public void adminCreateEspecializacao(CreateEspecializacaoDTO dto){
-        Boolean especializacao = especializacaoRepository.existsByTipoEspecializacao(dto.especializacao());
-        if(especializacao) {
+        if(especializacaoRepository.existsByTipoEspecializacao(dto.especializacao())) {
             throw new EspecializacaoException("Especialização Já cadastrada!");
         }
         especializacaoRepository.save(new Especializacao(dto.especializacao()));
-
     }
 
     @Transactional
     public void adminCreateEnfermagem(EnfermagemCreateDTO enfermagem) {
-        Boolean enfermeiro = enfermagemRepository.existsByEmail(enfermagem.email);
-        if(enfermeiro) {
+        if( enfermagemRepository.existsByEmail(enfermagem.email)) {
             throw new EnfermagemException("Enfermeiro(a) já cadastrado(a)");
         }
         enfermagemRepository.save(new Enfermagem(enfermagem.nome,enfermagem.cpf,
@@ -102,8 +102,7 @@ public class AdministradorService {
 
     @Transactional
     public void adminCreatePesquisador(PesquisadorCreateDto pesquisador) {
-        Boolean pesquisadorExiste  = pesquisadorRepository.existsByEmail(pesquisador.email);
-        if(pesquisadorExiste) {
+        if(pesquisadorRepository.existsByEmail(pesquisador.email)) {
             throw new PesquisadorException("Pesquisador(a) já cadastrado(a)");
         }
 
@@ -142,5 +141,102 @@ public class AdministradorService {
     public List<String> listEspecializacoes(){
         return  especializacaoRepository.findAll().stream().map(Especializacao::getTipoEspecializacao).toList();
     }
+
+    @Transactional
+    public void updateMedico(UpdateMedicoDto dto) {
+        Medico medico = medicoRepository.findById(dto.huodIdentify())
+                .orElseThrow(() -> new MedicoException("Médico(a) com ID '" + dto.huodIdentify() + "' não encontrado(a)."));
+
+        medico.setNome(dto.nome());
+        medico.setCrm(dto.crm());
+        medico.setEmail(dto.email());
+        medico.setCpf(dto.cpf());
+
+        Set<Especializacao> especializacoes = buscarEspecializacoesIndividuais(dto.especializacoes());
+        medico.setEspecializacoes(especializacoes);
+
+        medicoRepository.save(medico);
+    }
+
+    private Set<Especializacao> buscarEspecializacoesIndividuais(Set<String> nomes) {
+        Set<Especializacao> especializacoes = new HashSet<>();
+
+        for (String nome : nomes) {
+            Especializacao especializacao = especializacaoRepository.findByTipoEspecializacao(nome)
+                    .orElseThrow(() -> new EspecializacaoException("Especialização não encontrada: " + nome));
+            especializacoes.add(especializacao);
+        }
+
+        return especializacoes;
+    }
+
+    @Transactional
+    public void updatePesquisador(@Valid UpdatePesquisadorDto dto) {
+        Pesquisador pesquisador = pesquisadorRepository.findById(dto.huodIdentify())
+                .orElseThrow(() -> new PesquisadorException("Pesquisador(a) com ID '" + dto.huodIdentify() + "' não encontrado(a)."));
+
+        pesquisadorRepository.findByEmail(dto.email()).ifPresent(outro -> {
+            if (!outro.getId().equals(dto.huodIdentify())) {
+                throw new PesquisadorException("E-mail '" + dto.email() + "' já está sendo utilizado por outro(a) pesquisador(a).");
+            }
+        });
+
+        pesquisador.setNome(dto.nome());
+        pesquisador.setCpf(dto.cpf());
+        pesquisador.setEmail(dto.email());
+        pesquisador.setInstituicao(instituicaoRepository
+                .findById(dto.huodIdentify())
+                .orElseThrow(()-> new InstituicaoException("Instituição não encontrada com o ID: " + dto.idInstituicao())));
+        pesquisador.setAreasAtuacao(areasAtuacaoList(dto.idAreasAtuacao()));
+        pesquisadorRepository.save(pesquisador);
+    }
+
+    private List<AreaAtuacao> areasAtuacaoList(List<UUID> uuids) {
+        List<AreaAtuacao> areas = new ArrayList<>();
+
+        for (UUID id : uuids) {
+            AreaAtuacao area = areaAtuacaoRepository.findById(id)
+                    .orElseThrow(() -> new AreaAtuacaoException("Área de atuação não encontrada: " + id));
+            areas.add(area);
+        }
+
+        return areas;
+    }
+
+    public void updateAdministrador(@Valid UpdateAdministradorDto dto) {
+        Administrador administrador =
+                administradorRepository.findById(dto.huodIdentify())
+                        .orElseThrow(() -> new AdministradorException(""));
+
+        administradorRepository.findByEmail(dto.email()).ifPresent(outro -> {
+            if (!outro.getId().equals(dto.huodIdentify())) {
+                throw new AdministradorException("E-mail '" + dto.email() + "' já está sendo utilizado por outro(a) Administrador(a).");
+            }
+        });
+        administrador.setNome(dto.nome());
+        administrador.setCpf(dto.cpf());
+        administrador.setEmail(dto.email());
+        administradorRepository.save(administrador);
+    }
+
+    @Transactional
+    public void updateEnfermagem(@Valid UpdateEnfermeiroDTO dto) {
+        Enfermagem enfermagem = enfermagemRepository.findById(dto.huodIdentify())
+                .orElseThrow(() -> new EnfermagemException("Enfermeiro(a) com ID '" + dto.huodIdentify() + "' não encontrado(a)."));
+
+        enfermagemRepository.findByEmail(dto.email()).ifPresent(outro -> {
+            if (!outro.getId().equals(dto.huodIdentify())) {
+                throw new EnfermagemException("E-mail '" + dto.email() + "' já está sendo utilizado por outro(a) enfermeiro(a).");
+            }
+        });
+
+        enfermagem.setNome(dto.nome());
+        enfermagem.setCpf(dto.cpf());
+        enfermagem.setEmail(dto.email());
+        enfermagem.setCoren(dto.coren());
+
+        enfermagemRepository.save(enfermagem);
+    }
+
 }
 
