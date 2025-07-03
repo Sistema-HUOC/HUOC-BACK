@@ -2,9 +2,11 @@ package br.edu.upe.huocbackend.controller.dto.administrador;
 
 import br.edu.upe.huocbackend.model.Administrador;
 
-public record ResponseAdminastradorDTO(String nome, String cpf, String email) {
+import java.util.UUID;
+
+public record ResponseAdminastradorDTO(UUID huodIdentify, String nome, String cpf, String email) {
 
     public ResponseAdminastradorDTO(Administrador administrador) {
-        this(administrador.getNome(), administrador.getCpf(), administrador.getEmail());
+        this(administrador.getId() ,administrador.getNome(), administrador.getCpf(), administrador.getEmail());
     }
 }

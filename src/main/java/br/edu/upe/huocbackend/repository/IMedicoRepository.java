@@ -9,12 +9,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface IMedicoRepository extends JpaRepository<Medico, UUID>, RevisionRepository<Medico,UUID,Integer>{
 
-    boolean existsByEmail(String email);
+    Optional<Medico> findByEmail(String email);
+    Boolean existsByEmail(String email);
 
     @Query("""
     SELECT m FROM Medico m 
