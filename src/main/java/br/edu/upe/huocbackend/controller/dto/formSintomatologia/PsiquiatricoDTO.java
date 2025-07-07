@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PsiquiatricoDTO {
     private boolean ansiedade;
-    private float depressao;
+    private boolean depressao;
     private boolean alucinacao;
     private boolean insonia;
     private String observacao;

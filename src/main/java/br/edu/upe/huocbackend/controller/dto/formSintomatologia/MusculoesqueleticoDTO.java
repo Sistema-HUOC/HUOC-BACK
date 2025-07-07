@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class MusculoesqueleticoDTO {
     private boolean dorArticular;
-    private float rigidezMuscular;
+    private boolean rigidezMuscular;
     private boolean fraquezaMuscular;
     private boolean articulacaoInchada;
     private String observacao;

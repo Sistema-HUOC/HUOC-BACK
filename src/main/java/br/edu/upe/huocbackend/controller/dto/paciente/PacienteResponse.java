@@ -120,6 +120,7 @@ public class PacienteResponse {
             public String observacao;
         }
     }
+    public long id;
     public String nome;
     public String cpf;
     public LocalDate dataNasc;

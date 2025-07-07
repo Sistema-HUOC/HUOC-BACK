@@ -18,7 +18,7 @@ import java.util.UUID;
 @Table(name = "cat_gastrointestinal")
 public class Gastrointestinal {
 
-    public Gastrointestinal(boolean nausea, float diarreia, boolean prisaodeVentre, boolean dorAbdominal, boolean perdadeApetite, boolean constipação, String observacao) {
+    public Gastrointestinal(boolean nausea, boolean diarreia, boolean prisaodeVentre, boolean dorAbdominal, boolean perdadeApetite, boolean constipação, String observacao) {
         this.nausea = nausea;
         this.diarreia = diarreia;
         this.prisaodeVentre = prisaodeVentre;
@@ -35,7 +35,7 @@ public class Gastrointestinal {
     private boolean nausea;
 
     @Column(nullable = false)
-    private float diarreia;
+    private boolean diarreia;
 
     @Column(nullable = false)
     private boolean prisaodeVentre;

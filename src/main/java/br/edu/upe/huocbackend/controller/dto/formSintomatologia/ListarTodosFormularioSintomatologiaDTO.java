@@ -56,7 +56,7 @@ public class ListarTodosFormularioSintomatologiaDTO {
 
         this.catInflamatorio = new InflamatorioDTO(
                 form.getCatInflamatorio().isDordeGarganta(),
-                form.getCatInflamatorio().getLinfonodosInchados(),
+                form.getCatInflamatorio().isLinfonodosInchados(),
                 form.getCatInflamatorio().isErupcaoCutanea(),
                 form.getCatInflamatorio().isUlceraBocal(),
                 form.getCatInflamatorio().getObservacao()
@@ -64,7 +64,7 @@ public class ListarTodosFormularioSintomatologiaDTO {
 
         this.catCardiovascular = new CardiovascularDTO(
                 form.getCatCardiovascular().isPalpitações(),
-                form.getCatCardiovascular().getDorToraxica(),
+                form.getCatCardiovascular().isDorToraxica(),
                 form.getCatCardiovascular().isTontura(),
                 form.getCatCardiovascular().isPressaoAlta(),
                 form.getCatCardiovascular().isExtremidadesFrias(),
@@ -73,7 +73,7 @@ public class ListarTodosFormularioSintomatologiaDTO {
 
         this.catGastrointestinal = new GastrointestinalDTO(
                 form.getCatGastrointestinal().isNausea(),
-                form.getCatGastrointestinal().getDiarreia(),
+                form.getCatGastrointestinal().isDiarreia(),
                 form.getCatGastrointestinal().isPrisaodeVentre(),
                 form.getCatGastrointestinal().isDorAbdominal(),
                 form.getCatGastrointestinal().isPerdadeApetite(),
@@ -83,7 +83,7 @@ public class ListarTodosFormularioSintomatologiaDTO {
 
         this.catNeurologico = new NeurologicoDTO(
                 form.getCatNeurologico().isDordeCabeça(),
-                form.getCatNeurologico().getConfusaoMental(),
+                form.getCatNeurologico().isConfusaoMental(),
                 form.getCatNeurologico().isConvulsoes(),
                 form.getCatNeurologico().isDorNeurotipica(),
                 form.getCatNeurologico().isParestesia(),
@@ -94,7 +94,7 @@ public class ListarTodosFormularioSintomatologiaDTO {
 
         this.catMusculoesqueletico = new MusculoesqueleticoDTO(
                 form.getCatMusculoesqueletico().isDorArticular(),
-                form.getCatMusculoesqueletico().getRigidezMuscular(),
+                form.getCatMusculoesqueletico().isRigidezMuscular(),
                 form.getCatMusculoesqueletico().isFraquezaMuscular(),
                 form.getCatMusculoesqueletico().isArticulacaoInchada(),
                 form.getCatMusculoesqueletico().getObservacao()
@@ -102,14 +102,14 @@ public class ListarTodosFormularioSintomatologiaDTO {
 
         this.catHematologico = new HematologicoDTO(
                 form.getCatHematologico().isSangramentoAnormal(),
-                form.getCatHematologico().getHematomasFaceis(),
+                form.getCatHematologico().isHematomasFaceis(),
                 form.getCatHematologico().isPalides(),
                 form.getCatHematologico().getObservacao()
         );
 
         this.catPsiquiatrico = new PsiquiatricoDTO(
                 form.getCatPsiquiatrico().isAnsiedade(),
-                form.getCatPsiquiatrico().getDepressao(),
+                form.getCatPsiquiatrico().isDepressao(),
                 form.getCatPsiquiatrico().isAlucinacao(),
                 form.getCatPsiquiatrico().isInsonia(),
                 form.getCatPsiquiatrico().getObservacao()

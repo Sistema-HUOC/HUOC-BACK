@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class HematologicoDTO {
     private boolean sangramentoAnormal;
-    private float hematomasFaceis;
+    private boolean hematomasFaceis;
     private boolean palides;
     private String observacao;
 }

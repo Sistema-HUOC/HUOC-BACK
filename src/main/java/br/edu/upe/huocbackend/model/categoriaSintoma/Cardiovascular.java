@@ -18,7 +18,7 @@ import java.util.UUID;
 @Table(name = "cat_cardiovascular")
 public class Cardiovascular {
 
-    public Cardiovascular(boolean palpitações, float dorToraxica, boolean tontura, boolean pressaoAlta, boolean extremidadesFrias, String observacao) {
+    public Cardiovascular(boolean palpitações, boolean dorToraxica, boolean tontura, boolean pressaoAlta, boolean extremidadesFrias, String observacao) {
         this.palpitações = palpitações;
         this.dorToraxica = dorToraxica;
         this.tontura = tontura;
@@ -34,7 +34,7 @@ public class Cardiovascular {
     private boolean palpitações;
 
     @Column(nullable = false)
-    private float dorToraxica;
+    private boolean dorToraxica;
 
     @Column(nullable = false)
     private boolean tontura;

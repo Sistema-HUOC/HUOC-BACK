@@ -19,7 +19,7 @@ import java.util.UUID;
 @Table(name = "cat_inflamatorio")
 public class Inflamatorio {
 
-    public Inflamatorio(boolean dordeGarganta, float linfonodosInchados, boolean erupcaoCutanea, boolean ulceraBocal, String observacao) {
+    public Inflamatorio(boolean dordeGarganta, boolean linfonodosInchados, boolean erupcaoCutanea, boolean ulceraBocal, String observacao) {
         this.dordeGarganta = dordeGarganta;
         this.linfonodosInchados = linfonodosInchados;
         this.erupcaoCutanea = erupcaoCutanea;
@@ -34,7 +34,7 @@ public class Inflamatorio {
     private boolean dordeGarganta;
 
     @Column(nullable = false)
-    private float linfonodosInchados;
+    private boolean linfonodosInchados;
 
     @Column(nullable = false)
     private boolean erupcaoCutanea;
