@@ -19,7 +19,7 @@ import java.util.UUID;
 @Table(name = "cat_musculoesquelitico")
 public class Musculoesqueletico {
 
-    public Musculoesqueletico(boolean dorArticular, float rigidezMuscular, boolean fraquezaMuscular, boolean articulacaoInchada, String observacao) {
+    public Musculoesqueletico(boolean dorArticular, boolean rigidezMuscular, boolean fraquezaMuscular, boolean articulacaoInchada, String observacao) {
         this.dorArticular = dorArticular;
         this.rigidezMuscular = rigidezMuscular;
         this.fraquezaMuscular = fraquezaMuscular;
@@ -34,7 +34,7 @@ public class Musculoesqueletico {
     private boolean dorArticular;
 
     @Column(nullable = false)
-    private float rigidezMuscular;
+    private boolean rigidezMuscular;
 
     @Column(nullable = false)
     private boolean fraquezaMuscular;

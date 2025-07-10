@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GastrointestinalDTO {
     private boolean nausea;
-    private float diarreia;
+    private boolean diarreia;
     private boolean prisaodeVentre;
     private boolean dorAbdominal;
     private boolean perdadeApetite;

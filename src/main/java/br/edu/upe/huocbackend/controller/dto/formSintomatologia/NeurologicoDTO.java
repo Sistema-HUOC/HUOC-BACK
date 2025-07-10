@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class NeurologicoDTO {
     private boolean dordeCabeca;
-    private float confusaoMental;
+    private boolean confusaoMental;
     private boolean convulsoes;
     private boolean dorNeurotipica;
     private boolean parestesia;

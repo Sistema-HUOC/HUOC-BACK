@@ -91,7 +91,7 @@ public class PacienteMapper {
         if (i != null) {
             PacienteResponse.FormularioSintomatologiaDTO.InflamatorioDTO inf = new PacienteResponse.FormularioSintomatologiaDTO.InflamatorioDTO();
             inf.dordeGarganta = i.isDordeGarganta();
-            inf.linfonodosInchados = i.getLinfonodosInchados();
+            inf.linfonodosInchados = i.isLinfonodosInchados();
             inf.erupcaoCutanea = i.isErupcaoCutanea();
             inf.ulceraBocal = i.isUlceraBocal();
             inf.observacao = i.getObservacao();
@@ -102,7 +102,7 @@ public class PacienteMapper {
         if (c != null) {
             PacienteResponse.FormularioSintomatologiaDTO.CardiovascularDTO cv = new PacienteResponse.FormularioSintomatologiaDTO.CardiovascularDTO();
             cv.palpitações = c.isPalpitações();
-            cv.dorToraxica = c.getDorToraxica();
+            cv.dorToraxica = c.isDorToraxica();
             cv.tontura = c.isTontura();
             cv.pressaoAlta = c.isPressaoAlta();
             cv.extremidadesFrias = c.isExtremidadesFrias();
@@ -114,7 +114,7 @@ public class PacienteMapper {
         if (g != null) {
             PacienteResponse.FormularioSintomatologiaDTO.GastrointestinalDTO gi = new PacienteResponse.FormularioSintomatologiaDTO.GastrointestinalDTO();
             gi.nausea = g.isNausea();
-            gi.diarreia = g.getDiarreia();
+            gi.diarreia = g.isDiarreia();
             gi.prisaodeVentre = g.isPrisaodeVentre();
             gi.dorAbdominal = g.isDorAbdominal();
             gi.perdadeApetite = g.isPerdadeApetite();
@@ -127,7 +127,7 @@ public class PacienteMapper {
         if (n != null) {
             PacienteResponse.FormularioSintomatologiaDTO.NeurologicoDTO neu = new PacienteResponse.FormularioSintomatologiaDTO.NeurologicoDTO();
             neu.dordeCabeça = n.isDordeCabeça();
-            neu.confusaoMental = n.getConfusaoMental();
+            neu.confusaoMental = n.isConfusaoMental();
             neu.convulsoes = n.isConvulsoes();
             neu.dorNeurotipica = n.isDorNeurotipica();
             neu.parestesia = n.isParestesia();
@@ -141,7 +141,7 @@ public class PacienteMapper {
         if (m != null) {
             PacienteResponse.FormularioSintomatologiaDTO.MusculoesqueleticoDTO musc = new PacienteResponse.FormularioSintomatologiaDTO.MusculoesqueleticoDTO();
             musc.dorArticular = m.isDorArticular();
-            musc.rigidezMuscular = m.getRigidezMuscular();
+            musc.rigidezMuscular = m.isRigidezMuscular();
             musc.fraquezaMuscular = m.isFraquezaMuscular();
             musc.articulacaoInchada = m.isArticulacaoInchada();
             musc.observacao = m.getObservacao();
@@ -152,7 +152,7 @@ public class PacienteMapper {
         if (h != null) {
             PacienteResponse.FormularioSintomatologiaDTO.HematologicoDTO hem = new PacienteResponse.FormularioSintomatologiaDTO.HematologicoDTO();
             hem.sangramentoAnormal = h.isSangramentoAnormal();
-            hem.hematomasFaceis = h.getHematomasFaceis();
+            hem.hematomasFaceis = h.isHematomasFaceis();
             hem.palides = h.isPalides();
             hem.observacao = h.getObservacao();
             dto.catHematologico = hem;
@@ -162,7 +162,7 @@ public class PacienteMapper {
         if (p != null) {
             PacienteResponse.FormularioSintomatologiaDTO.PsiquiatricoDTO psi = new PacienteResponse.FormularioSintomatologiaDTO.PsiquiatricoDTO();
             psi.ansiedade = p.isAnsiedade();
-            psi.depressao = p.getDepressao();
+            psi.depressao = p.isDepressao();
             psi.alucinacao = p.isAlucinacao();
             psi.insonia = p.isInsonia();
             psi.observacao = p.getObservacao();

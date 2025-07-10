@@ -19,7 +19,7 @@ import java.util.UUID;
 @Table(name = "cat_psiquatrico")
 public class Psiquiatrico {
 
-    public Psiquiatrico(boolean ansiedade, float depressao, boolean alucinacao, boolean insonia, String observacao) {
+    public Psiquiatrico(boolean ansiedade, boolean depressao, boolean alucinacao, boolean insonia, String observacao) {
         this.ansiedade = ansiedade;
         this.depressao = depressao;
         this.alucinacao = alucinacao;
@@ -34,7 +34,7 @@ public class Psiquiatrico {
     private boolean ansiedade;
 
     @Column(nullable = false)
-    private float depressao;
+    private boolean depressao;
 
     @Column(nullable = false)
     private boolean alucinacao;

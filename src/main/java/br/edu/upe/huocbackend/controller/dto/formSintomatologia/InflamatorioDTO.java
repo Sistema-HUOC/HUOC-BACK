@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class InflamatorioDTO {
     private boolean dordeGarganta;
-    private float linfonodosInchados;
+    private boolean linfonodosInchados;
     private boolean erupcaoCutanea;
     private boolean ulceraBocal;
     private String observacao;

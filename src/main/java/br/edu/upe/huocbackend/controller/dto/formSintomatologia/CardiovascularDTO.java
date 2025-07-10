@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CardiovascularDTO {
     private boolean palpitacoes;
-    private float dorToraxica;
+    private boolean dorToraxica;
     private boolean tontura;
     private boolean pressaoAlta;
     private boolean extremidadesFrias;

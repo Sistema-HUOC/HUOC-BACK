@@ -61,7 +61,7 @@ public class PacienteResponse {
 
         public static class InflamatorioDTO {
             public boolean dordeGarganta;
-            public float linfonodosInchados;
+            public boolean linfonodosInchados;
             public boolean erupcaoCutanea;
             public boolean ulceraBocal;
             public String observacao;
@@ -69,7 +69,7 @@ public class PacienteResponse {
 
         public static class CardiovascularDTO {
             public boolean palpitações;
-            public float dorToraxica;
+            public boolean dorToraxica;
             public boolean tontura;
             public boolean pressaoAlta;
             public boolean extremidadesFrias;
@@ -78,7 +78,7 @@ public class PacienteResponse {
 
         public static class GastrointestinalDTO {
             public boolean nausea;
-            public float diarreia;
+            public boolean diarreia;
             public boolean prisaodeVentre;
             public boolean dorAbdominal;
             public boolean perdadeApetite;
@@ -88,7 +88,7 @@ public class PacienteResponse {
 
         public static class NeurologicoDTO {
             public boolean dordeCabeça;
-            public float confusaoMental;
+            public boolean confusaoMental;
             public boolean convulsoes;
             public boolean dorNeurotipica;
             public boolean parestesia;
@@ -99,7 +99,7 @@ public class PacienteResponse {
 
         public static class MusculoesqueleticoDTO {
             public boolean dorArticular;
-            public float rigidezMuscular;
+            public boolean rigidezMuscular;
             public boolean fraquezaMuscular;
             public boolean articulacaoInchada;
             public String observacao;
@@ -107,19 +107,20 @@ public class PacienteResponse {
 
         public static class HematologicoDTO {
             public boolean sangramentoAnormal;
-            public float hematomasFaceis;
+            public boolean hematomasFaceis;
             public boolean palides;
             public String observacao;
         }
 
         public static class PsiquiatricoDTO {
             public boolean ansiedade;
-            public float depressao;
+            public boolean depressao;
             public boolean alucinacao;
             public boolean insonia;
             public String observacao;
         }
     }
+    public long id;
     public String nome;
     public String cpf;
     public LocalDate dataNasc;

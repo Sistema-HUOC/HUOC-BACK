@@ -18,7 +18,7 @@ import java.util.UUID;
 @Table(name = "cat_neurologico")
 public class Neurologico {
 
-    public Neurologico(boolean dordeCabeça, float confusaoMental, boolean convulsoes, boolean dorNeurotipica, boolean parestesia, boolean paresia, boolean plegia, String observacao) {
+    public Neurologico(boolean dordeCabeça, boolean confusaoMental, boolean convulsoes, boolean dorNeurotipica, boolean parestesia, boolean paresia, boolean plegia, String observacao) {
         this.dordeCabeça = dordeCabeça;
         this.confusaoMental = confusaoMental;
         this.convulsoes = convulsoes;
@@ -36,7 +36,7 @@ public class Neurologico {
     private boolean dordeCabeça;
 
     @Column(nullable = false)
-    private float confusaoMental;
+    private boolean confusaoMental;
 
     @Column(nullable = false)
     private boolean convulsoes;

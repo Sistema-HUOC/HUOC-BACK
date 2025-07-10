@@ -19,7 +19,7 @@ import java.util.UUID;
 @Table(name = "cat_hematologico")
 public class Hematologico {
 
-    public Hematologico(boolean sangramentoAnormal, float hematomasFaceis, boolean palides, String observacao) {
+    public Hematologico(boolean sangramentoAnormal, boolean hematomasFaceis, boolean palides, String observacao) {
         this.sangramentoAnormal = sangramentoAnormal;
         this.hematomasFaceis = hematomasFaceis;
         this.palides = palides;
@@ -33,7 +33,7 @@ public class Hematologico {
     private boolean sangramentoAnormal;
 
     @Column(nullable = false)
-    private float hematomasFaceis;
+    private boolean hematomasFaceis;
 
     @Column(nullable = false)
     private boolean palides;
