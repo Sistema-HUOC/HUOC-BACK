@@ -1,7 +1,8 @@
 package br.edu.upe.huocbackend.repository;
 
-import br.edu.upe.huocbackend.model.Enfermagem;
-import br.edu.upe.huocbackend.model.Medico;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,14 +11,16 @@ import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-import java.util.UUID;
+import br.edu.upe.huocbackend.model.Medico;
 
 @Repository
 public interface IMedicoRepository extends JpaRepository<Medico, UUID>, RevisionRepository<Medico,UUID,Integer>{
 
     Optional<Medico> findByEmail(String email);
     Boolean existsByEmail(String email);
+    
+    Optional<Medico> findByCpf(String CPF);
+    Boolean existsByCpf(String CPF);
 
     @Query("""
     SELECT m FROM Medico m 

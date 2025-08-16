@@ -17,6 +17,9 @@ import java.util.UUID;
 public interface IAdministradorRepository extends JpaRepository<Administrador, UUID>, RevisionRepository<Administrador, UUID, Integer> {
     Optional<Administrador> findByEmail(String email);
     boolean existsByEmail(String email);
+    
+    Optional<Administrador> findByCpf(String cpf);
+
 
     @Query("""
     SELECT a FROM Administrador a 
